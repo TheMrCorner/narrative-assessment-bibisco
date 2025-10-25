@@ -20,7 +20,7 @@ angular.
   });
 
 function OpenProjectController($location, $rootScope, $timeout, $translate, ChapterService,
-  LoggerService, PopupBoxesService, ProjectService) {
+  LoggerService, PopupBoxesService, ProjectService, AssessmentService) {
 
   // hide menu
   $rootScope.$emit('SHOW_OPEN_PROJECT');
@@ -38,7 +38,10 @@ function OpenProjectController($location, $rootScope, $timeout, $translate, Chap
    
     // check words written
     ChapterService.checkWordsWrittenInit();
-    LoggerService.info('This is the function called to open a project');
+
+    // TODO call python service to analyze project
+    AssessmentService.load_project(id);
+
     LoggerService.info('Open project ' + id);
 
     // reset partsExpansionStatus

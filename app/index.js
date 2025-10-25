@@ -28,6 +28,7 @@ const axios = require('axios');
 
 // Assessment service management
 let assessmentService = null;
+let assessmentServiceReady = false;
 const PORT = 5000;
 const BASE_URL = `http://localhost:${PORT}`;
 
@@ -243,6 +244,20 @@ ipc.on('showItemInFolder', function(event, fullPath) {
   shell.showItemInFolder(fullPath);
 });
 
+ipc.on('check-api-status', function(event) {
+  console.log("Checking api status");
+
+  checkApiHealth().then(() => {
+    event.reply('api-status', {ready: true});
+  }).catch(() => {
+    event.reply('api-status', { ready: false });
+  })
+});
+
+ipc.on('get-api-status', function(event) {
+  event.returnValue = assessmentServiceReady;
+});
+
 ipc.on('api-call', async function(event, arg) {
   try {
     const config = {
@@ -250,11 +265,17 @@ ipc.on('api-call', async function(event, arg) {
       url: `${BASE_URL}${arg.endpoint}`,
     };
 
+    console.log(config.url);
+
     if (arg.data) {
       config.data = arg.data;
     }
+
+    console.log(config.data);
     
     const response = await axios(config);
+    
+    console.log(response.data);
     event.reply('api-response', { success: true, data: response.data });
   } catch (error) {
     event.reply('api-response', { 
@@ -299,7 +320,7 @@ async function checkApiHealth() {
   try {
     const response = await axios.get(`${BASE_URL}/health`);
     console.log('Assessment Service is ready!');
-    // Notify renderer processes that API is ready
+    assessmentServiceReady = true
     if (mainWindow) {
       mainWindow.webContents.send('assessment-service-ready');
     }
