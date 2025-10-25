@@ -1,0 +1,800 @@
+{
+  "filename": "./db/bibisco.json",
+  "collections": [
+    {
+      "name": "properties",
+      "data": [
+        {
+          "name": "font",
+          "value": "garamond",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445275,
+            "version": 0
+          },
+          "$loki": 1
+        },
+        {
+          "name": "font-size",
+          "value": "medium",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445276,
+            "version": 0
+          },
+          "$loki": 2
+        },
+        {
+          "name": "indentParagraphEnabled",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445277,
+            "version": 0
+          },
+          "$loki": 3
+        },
+        {
+          "name": "spellCheckEnabled",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445278,
+            "version": 0
+          },
+          "$loki": 4
+        },
+        {
+          "name": "autoSaveEnabled",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445279,
+            "version": 0
+          },
+          "$loki": 5
+        },
+        {
+          "name": "backupDirectory",
+          "value": "",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445287,
+            "version": 0
+          },
+          "$loki": 6
+        },
+        {
+          "name": "sceneTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445280,
+            "version": 0
+          },
+          "$loki": 7
+        },
+        {
+          "name": "chaptersdndTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445281,
+            "version": 0
+          },
+          "$loki": 8
+        },
+        {
+          "name": "scenesdndTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445281,
+            "version": 0
+          },
+          "$loki": 9
+        },
+        {
+          "name": "locationsdndTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445282,
+            "version": 0
+          },
+          "$loki": 10
+        },
+        {
+          "name": "charactersdndTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445283,
+            "version": 0
+          },
+          "$loki": 11
+        },
+        {
+          "name": "strandsdndTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445284,
+            "version": 0
+          },
+          "$loki": 12
+        },
+        {
+          "name": "timelineTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445285,
+            "version": 0
+          },
+          "$loki": 13
+        },
+        {
+          "name": "socialMediaTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445285,
+            "version": 0
+          },
+          "$loki": 14
+        },
+        {
+          "name": "richTextEditorTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 15
+        },
+        {
+          "name": "projectsDirectory",
+          "value": "",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445287,
+            "version": 0
+          },
+          "$loki": 16
+        },
+        {
+          "name": "locale",
+          "value": "",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445288,
+            "version": 0
+          },
+          "$loki": 17
+        },
+        {
+          "name": "analysisTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 18
+        },
+        {
+          "name": "theme",
+          "value": "classic",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 19
+        },
+        {
+          "name": "relationsTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 20
+        },
+        {
+          "name": "wordswrittenhistoryTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 21
+        },
+        {
+          "name": "backupTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 22
+        },
+        {
+          "name": "addProfileImageTip",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 23
+        },
+        {
+          "name": "maxBackupNumber",
+          "value": "10",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 24
+        },
+        {
+          "name": "autoBackupOnExit",
+          "value": "true",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 25
+        },
+        {
+          "name": "autoBackupFrequency",
+          "value": "TWO_HOURS",
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 26
+        },
+        {
+          "name": "zoomLevel",
+          "value": 100,
+          "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+          },
+          "$loki": 27
+        },
+        {
+          "name": "sceneseparator",
+          "value": "blank_line",
+          "meta": {
+              "revision": 0,
+              "created": 1487541445286,
+              "version": 0
+          },
+          "$loki": 28
+        },
+        {
+          "name": "linespacing",
+          "value": 14,
+          "meta": {
+              "revision": 0,
+              "created": 1487541445286,
+              "version": 0
+          },
+          "$loki": 29
+      },
+      {
+          "name": "paragraphspacing",
+          "value": "medium",
+          "meta": {
+              "revision": 0,
+              "created": 1487541445286,
+              "version": 0
+          },
+          "$loki": 30
+      },
+      {
+          "name": "chaptertitleformat",
+          "value": "numbertitle",
+          "meta": {
+              "revision": 0,
+              "created": 1487541445286,
+              "version": 0
+          },
+          "$loki": 31
+      },
+      {
+          "name": "chaptertitleposition",
+          "value": "left",
+          "meta": {
+              "revision": 0,
+              "created": 1487541445286,
+              "version": 0
+          },
+          "$loki": 32
+      },
+      {
+        "name": "readTip",
+        "value": "true",
+        "meta": {
+            "revision": 0,
+            "created": 1487541445286,
+            "version": 0
+        },
+        "$loki": 33
+    },
+    {
+      "name": "autocapitalizeEnabled",
+      "value": "true",
+      "meta": {
+          "revision": 0,
+          "created": 1487541445286,
+          "version": 0
+      },
+      "$loki": 34
+    },
+    {
+      "name": "imageEditTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 35
+    },
+    {
+      "name": "pagenumberposition",
+      "value": "footer",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 36
+    },
+    {
+      "name": "pagenumberalignment",
+      "value": "center",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 37
+    },
+    {
+      "name": "showfirstpagenumber",
+      "value": "false",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 38
+    },
+    {
+      "name": "pagenumberformat",
+      "value": "number",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 39
+    },
+    {
+      "name": "tocformat",
+      "value": "none",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 40
+    },
+    {
+      "name": "toctitle",
+      "value": "",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 41
+    },
+    {
+      "name": "exporthighlightedtext",
+      "value": "false",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 42
+    },
+    {
+      "name": "exportpath",
+      "value": "",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 43
+    },
+    {
+      "name": "footendnoteTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 44
+    },
+    {
+      "name": "docxnoteexport",
+      "value": "footnote",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 45
+    },
+    {
+      "name": "pdfnoteexport",
+      "value": "chapterend",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 46
+    },
+    {
+      "name": "txtnoteexport",
+      "value": "chapterend",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 47
+    },
+    {
+      "name": "epubnoteexport",
+      "value": "chapterend",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 48
+    },
+    {
+      "name": "bookendtitle",
+      "value": "",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 49
+    },
+    {
+      "name": "exportcomments",
+      "value": "false",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 50
+    },
+    {
+      "name": "exportscenetitle",
+      "value": "false",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 51
+    },
+    {
+      "name": "scenetitleformat",
+      "value": "title",
+      "meta": {
+          "revision": 0,
+          "created": 1487541445286,
+          "version": 0
+      },
+      "$loki": 52
+  },
+  {
+      "name": "scenetitleposition",
+      "value": "left",
+      "meta": {
+          "revision": 0,
+          "created": 1487541445286,
+          "version": 0
+      },
+      "$loki": 53
+  },
+    {
+      "name": "exportunansweredquestions",
+      "value": "false",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 54
+    },
+    {
+      "name": "exportfontsize",
+      "value": 12,
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 55
+    },
+    {
+      "name": "chapteredittitleTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 56
+    },
+    {
+      "name": "characteredittitleTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 57
+    },
+    {
+      "name": "interviewfreetextTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 58
+    },
+    {
+      "name": "shortcutTip",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 59
+    },
+    {
+      "name": "autoOpenProjectExplorerOnTextEdit",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 60
+    },
+    {
+      "name": "defaultElementOpeningMode",
+      "value": "edit",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 61
+    },
+    {
+      "name": "showElementAfterInsertion",
+      "value": "true",
+      "meta": {
+        "revision": 0,
+        "created": 1487541445286,
+        "version": 0
+      },
+      "$loki": 62
+    }
+      ],
+      "idIndex": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "binaryIndices": {},
+      "constraints": null,
+      "uniqueNames": [],
+      "transforms": {},
+      "objType": "properties",
+      "dirty": false,
+      "cachedIndex": null,
+      "cachedBinaryIndex": null,
+      "cachedData": null,
+      "adaptiveBinaryIndices": true,
+      "transactional": false,
+      "cloneObjects": false,
+      "cloneMethod": "parse-stringify",
+      "asyncListeners": false,
+      "disableChangesApi": true,
+      "autoupdate": false,
+      "ttl": null,
+      "maxId": 62,
+      "DynamicViews": [],
+      "events": {
+        "insert": [
+          null
+        ],
+        "update": [
+          null
+        ],
+        "pre-insert": [],
+        "pre-update": [],
+        "close": [],
+        "flushbuffer": [],
+        "error": [],
+        "delete": [
+          null
+        ],
+        "warning": [
+          null
+        ]
+      },
+      "changes": []
+    },
+    {
+      "name": "projects",
+      "data": [],
+      "idIndex": [],
+      "binaryIndices": {},
+      "constraints": null,
+      "uniqueNames": [],
+      "transforms": {},
+      "objType": "projects",
+      "dirty": false,
+      "cachedIndex": null,
+      "cachedBinaryIndex": null,
+      "cachedData": null,
+      "adaptiveBinaryIndices": true,
+      "transactional": false,
+      "cloneObjects": false,
+      "cloneMethod": "parse-stringify",
+      "asyncListeners": false,
+      "disableChangesApi": true,
+      "autoupdate": false,
+      "ttl": null,
+      "maxId": 0,
+      "DynamicViews": [],
+      "events": {
+        "insert": [
+          null
+        ],
+        "update": [
+          null
+        ],
+        "pre-insert": [],
+        "pre-update": [],
+        "close": [],
+        "flushbuffer": [],
+        "error": [],
+        "delete": [
+          null
+        ],
+        "warning": [
+          null
+        ]
+      },
+      "changes": []
+    }
+  ],
+  "databaseVersion": 1.1,
+  "engineVersion": 1.1,
+  "autosave": false,
+  "autosaveInterval": 5000,
+  "autosaveHandle": null,
+  "options": {
+    "serializationMethod": "normal",
+    "destructureDelimiter": "$<\n"
+  },
+  "persistenceMethod": "fs",
+  "persistenceAdapter": null,
+  "verbose": false,
+  "events": {
+    "init": [
+      null
+    ],
+    "loaded": [],
+    "flushChanges": [],
+    "close": [],
+    "changes": [],
+    "warning": []
+  },
+  "ENV": "NODEJS"
+}

@@ -1,0 +1,118 @@
+<pageheader headertitle="jsp.settings.h1"></pageheader>
+
+  <div class="scrollable-box-full-height-page-with-header">
+
+    <div class="col-sm-12">
+      <form name="settingsForm" class="form-horizontal"
+        ng-submit="$ctrl.save(settingsForm.$valid, settingsForm.$dirty)"
+        novalidate>
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">{{'theme' | translate}}</label>
+          <div class="col-sm-8">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" ng-click="$ctrl.selectClassicTheme()" 
+                ng-class="{ 'active' : $ctrl.theme === 'classic' }">
+                {{'theme_classic' | translate}}
+              </button>
+              <button type="button" class="btn btn-default" ng-click="$ctrl.selectDarkTheme()" 
+                ng-class="{ 'active' : $ctrl.theme === 'dark' }">
+                {{'theme_dark' | translate}}<sefeaturemarker ng-if="$root.ed==='ce'"></sefeaturemarker>
+              </button>
+              <button type="button" class="btn btn-default" ng-click="$ctrl.selectDarkhcTheme()" 
+                ng-class="{ 'active' : $ctrl.theme === 'darkhc' }">
+                {{'theme_darkhc' | translate}}<sefeaturemarker ng-if="$root.ed==='ce'"></sefeaturemarker>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <buttongroupfield group="$ctrl.zoomLevelGroup" 
+          label="zoom_level" form="settingsForm" onclickbutton="$ctrl.selectZoomLevel(selected)"
+          model="$ctrl.zoomLevel" labelcols="3" inputcols="7"></buttongroupfield>
+
+        <languageinputfield applyonchange="false"
+          onselectlanguage="$ctrl.selectLanguage(selectedLanguage)"
+          label="jsp.language.form.selectLanguage.label"
+          labelcols="3" inputcols="8">
+        </languageinputfield>
+
+        <directoryinputfield
+          field="settingsForm.projectsDirectory"
+          model="$ctrl.selectedProjectsDirectory" name="projectsDirectory"
+          label="jsp.changeProjectsDirectory.label"
+          labelcols="3" inputcols="8"
+          onselectdirectory="$ctrl.selectProjectsDirectory(directory)"
+          forbiddenDirectory="$ctrl.forbiddenDirectory"
+          note="jsp.changeProjectsDirectory.p.1" notebadge="important_note">
+        </directoryinputfield>
+
+        <buttongroupfield group="$ctrl.autosavegroup" 
+          label="jsp.richTextEditorSettings.autoSave" form="settingsForm"
+          model="$ctrl.autoSaveEnabled" labelcols="3" inputcols="7"
+          note="autosave_note" notebadge="important_note"></buttongroupfield>
+
+        <directoryinputfield
+          field="settingsForm.backupDirectory"
+          model="$ctrl.selectedBackupDirectory" name="backupDirectory"
+          label="automatic_backup_directory"
+          labelcols="3" inputcols="8"
+          onselectdirectory="$ctrl.selectBackupDirectory(directory)"
+          forbiddenDirectory="$ctrl.forbiddenBackupDirectory"
+          customerrormessage="$ctrl.backupDirectoryCustomErrorMessage">
+        </directoryinputfield>
+
+        <buttongroupfield group="$ctrl.autoBackupOnExitGroup" 
+          label="auto_backup_onexit" form="settingsForm"
+          model="$ctrl.autoBackupOnExit" labelcols="3" inputcols="7"></buttongroupfield>
+
+        <buttongroupfield group="$ctrl.autoBackupFrequencyGroup" 
+          label="auto_backup_frequency" form="settingsForm"
+          model="$ctrl.autoBackupFrequency" labelcols="3" inputcols="7"></buttongroupfield>
+
+        <numberinputfield field="settingsForm.maxBackupNumber" id="maxbackupnumber"
+          model="$ctrl.maxBackupNumber" name="maxBackupNumber" 
+          label="max_backup_number" min="1" max="20" maxlength="2" required
+          labelcols="3" inputcols="7" note="max_backup_number_note" notebadge="important_note">
+        </numberinputfield>
+
+        <buttongroupfield group="$ctrl.defaultElementOpeningModeGroup" 
+          label="default_element_opening_mode" form="settingsForm"
+          model="$ctrl.defaultElementOpeningMode" labelcols="3" inputcols="7"
+          note="default_element_opening_mode_note" notebadge="important_note">
+        </buttongroupfield>
+
+        <buttongroupfield group="$ctrl.showElementAfterInsertionGroup" 
+          label="show_element_after_insertion" form="settingsForm"
+          model="$ctrl.showElementAfterInsertion" labelcols="3" inputcols="7"
+          note="show_element_after_insertion_note" notebadge="important_note">
+        </buttongroupfield>
+
+        <div class="detail-footer bibiscoNotSelectableText">
+          <div class="row">
+            <hr />
+          </div>
+          <div class="row">
+            <span class="pull-right">
+              <dropdownmenu buttonlabel="jsp.common.button.more" 
+                items="$ctrl.actionitems" open="up"
+                visible="true">
+              </dropdownmenu>
+              <button type="submit" class="btn btn-primary" 
+                uib-tooltip="{{'jsp.common.button.save.tooltip' | translate}}">
+                <span ng-if="$ctrl.saving">
+                  <i class="fa fa-circle-o-notch fa-spin"></i>
+                </span>
+                <span>{{"jsp.common.button.save" | translate}}</span>
+              </button>
+              <buttonback></buttonback>
+            </span>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+
+</div>
+

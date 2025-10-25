@@ -1,0 +1,39 @@
+<modal-component modal-instance="$uibModalInstance" class="ng-scope ng-isolate-scope">
+  <div class="modal-body" id="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <form name="$ctrl.nodeDetailForm" class="form-horizontal" novalidate>          
+          <textinputfield textinputfieldid="nodedetailid" field="$ctrl.nodeDetailForm.name" model="$ctrl.name" name="name" 
+            maxlength="200" typeheadsource="$ctrl.items" autofocus required 
+            label="{{'relations_element_name' | translate}}" labelcols="2" inputcols="9">
+          </textinputfield>
+          <colorpickerfield form="$ctrl.nodeDetailForm" model="$ctrl.color" label="common_color"
+            labelcols="2" inputcols="9"></colorpickerfield>
+          <buttongroupfield group="$ctrl.shapegroup" 
+            label="Shape" form="$ctrl.nodeDetailForm"
+            model="$ctrl.shape" labelcols="2" inputcols="9"></buttongroupfield> 
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer bibiscoNotSelectableText">
+      <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-6 text-center">
+          <button class="btn btn-primary" type="button"
+            uib-tooltip="{{'jsp.common.button.save.tooltip' | translate}}"
+            ng-click="$ctrl.save()">{{"jsp.common.button.save" | translate}}</button>
+          <button class="btn btn-default" type="button"
+            uib-tooltip="{{'back_button_tooltip'+$root.os | translate}}"
+            ng-click="$ctrl.back()"> {{"jsp.common.button.back" | translate}}</button>
+        </div>
+        <div class="col-sm-3">
+          <span class="pull-right">
+            <button class="btn btn-default relations-delete-item-button" type="button" ng-if="$ctrl.editMode"
+            ng-click="$ctrl.delete()"> {{"jsp.common.button.delete" | translate}}</button>
+          </span>
+        </div>
+      </div>
+    </div>
+</modal-component>

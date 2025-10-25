@@ -1,0 +1,40 @@
+<elementdetail
+  breadcrumbitems="$ctrl.breadcrumbitems"
+  changetitleenabled="true"
+  changetitlefunction="$ctrl.changeTitle()"
+  changetitlelabel="object_change_name_label"
+  characters="$ctrl.object.characters"
+  content="$ctrl.object.description"
+  custombuttonenabled="true",
+  custombuttonfunction="$ctrl.managegroupsmembership()",
+  custombuttonlabel="groups_button",
+  custombuttontooltip="{{'groups_memberships_tooltip'+$root.os}}",
+  deleteconfirmmessage="object_delete_confirm"
+  deleteenabled="true"
+  deleteforbidden="$ctrl.deleteforbidden"
+  deleteforbiddenmessage="object_delete_ko"
+  deletefunction="$ctrl.delete()"
+  editmode="$ctrl.mode === 'edit'"
+  editfunction="$ctrl.edit()"
+  eventname="SHOW_ELEMENT_DETAIL"
+  eventsenabled="true"
+  groupsmembershipfunction="$ctrl.managegroupsmembership()"
+  headertitle="{{$ctrl.object.name}}"
+  imagesenabled="true"
+  lastsave="$ctrl.object.lastsave"
+  noprofileimageicon="magic"
+  profileimage="{{$ctrl.object.profileimage}}"
+  profileimageenabled="true"
+  profileimagefunction="$ctrl.addprofileimage()"
+  readfunction="$ctrl.read()"
+  savefunction="$ctrl.savefunction()"
+  showeventsfunction="$ctrl.showeventsfunction()"
+  showeventslabel="{{'object_events_tooltip'+$root.os}}"
+  showimagesfunction="$ctrl.showimagesfunction()"
+  showimageslabel="{{'object_images_tooltip'+$root.os}}"
+  tags="$ctrl.tags"
+  taskstatus="$ctrl.object.status"
+  taskstatuschangefunction="$ctrl.changeStatus(status)"
+  words="$ctrl.object.words"
+  wordscharactersenabled="true">
+</elementdetail>

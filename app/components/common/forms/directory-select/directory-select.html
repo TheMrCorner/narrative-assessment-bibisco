@@ -1,0 +1,19 @@
+<div class="input-group" ng-class="{ 'has-error': $ctrl.hasError() }">
+  <input name="{{$ctrl.name}}" class="form-control" type="text" readonly="readonly"
+    ng-attr-placeholder="{{$ctrl.placeholder | translate}}"
+    ng-model="$ctrl.model" required/>
+  <span class="input-group-btn">
+      <button class="btn btn-default" type="button"
+        ng-click="$ctrl.opendirectorydialog()">
+        {{"jsp.common.button.select" | translate}}
+        <span ng-if="$ctrl.opening">
+          <i class="fa fa-circle-o-notch fa-spin"></i>
+      </span>
+    </button>
+  </span>
+</div>
+<validationmessages field="$ctrl.field"></validationmessages>
+<p class="text-danger" ng-show="$ctrl.forbiddendirectory || $ctrl.customerrormessage" style="margin-bottom: 0px;">
+  <span ng-if="$ctrl.forbiddendirectory">{{"jsp.common.message.forbidden.directory" | translate}}</span>
+  <span ng-if="$ctrl.customerrormessage">{{$ctrl.customerrormessage | translate}}</span>
+</p>

@@ -1,0 +1,20 @@
+<breadcrumb items="$ctrl.breadcrumbitems"></breadcrumb>
+<pageheader headertitle="goals_history"></pageheader>
+
+ 
+<div class="scrollable-box-full-height-page-with-breadcrumb-header-footer">
+  <fullpageloader ng-if="$ctrl.loading"></fullpageloader>
+  <div ng-if="!$ctrl.loading">
+      <div class="col-sm-12">
+          <last30dayswrittenwords wordsperdaygoal="$ctrl.wordsperdaygoal"></last30dayswrittenwords>
+      </div>
+      <div class="col-sm-12">
+        <monthlyaveragewrittenwords wordsperdaygoal="$ctrl.wordsperdaygoal"></monthlyaveragewrittenwords>
+      </div>
+      <div class="col-sm-12">
+        <dayofweekwrittenwords></dayofweekwrittenwords>
+      </div>
+  </div>
+</div>
+
+<pagefooter tipcode="wordswrittenhistoryTip" tipenabled="true"></pagefooter>

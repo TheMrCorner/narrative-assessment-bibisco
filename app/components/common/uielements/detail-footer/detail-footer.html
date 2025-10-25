@@ -1,0 +1,43 @@
+<div class="detail-footer bibiscoNotSelectableText">
+
+    <detailfootertop
+      autosaveenabled="$ctrl.autosaveenabled"
+      characters="$ctrl.characters"
+      content="$ctrl.content" 
+      editmode="$ctrl.editmode"
+      lastsave="$ctrl.lastsave"
+      words="$ctrl.words"
+      wordscharactersenabled="$ctrl.wordscharactersenabled">
+    </detailfootertop>
+    <div class="row">
+      <span class="pull-left">
+        <projectexplorerbutton></projectexplorerbutton>
+        <imagesbutton showimagesfunction="$ctrl.showimagesfunction()" showimageslabel="{{$ctrl.showimageslabel}}" visible="$ctrl.imagesenabled"></imagesbutton>
+        <eventsbutton showeventsfunction="$ctrl.showeventsfunction()" showeventslabel="{{$ctrl.showeventslabel}}" visible="$ctrl.eventsenabled"></eventsbutton>
+        <tagsbutton showtagsfunction="$ctrl.showtagsfunction()" showtagslabel="{{$ctrl.showtagslabel}}" visible="$ctrl.tagsenabled"></tagsbutton>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.custombuttonfunction()"
+          ng-if="$ctrl.custombuttonenabled"
+          uib-tooltip="{{$ctrl.custombuttontooltip | translate}}">
+          {{$ctrl.custombuttonlabel | translate}}<sefeaturemarker ng-if="$root.ed==='ce'"></sefeaturemarker>
+        </button>
+      </span>
+      <span class="pull-right">
+        <contextualtipbutton ng-if="$ctrl.tipenabled" modalstyle="{{$ctrl.tipmodalstyle}}"
+          tipcode="{{$ctrl.tipcode}}"></contextualtipbutton>
+        <dropdownmenu buttonlabel="jsp.common.button.more" 
+          items="$ctrl.actionitems" 
+          open="up"
+          visible="$ctrl.actionitems && $ctrl.actionitems.length > 0">
+        </dropdownmenu>
+        <editsavebackbuttonbar 
+          autosaveenabled="$ctrl.autosaveenabled"
+          editbuttonvisible="$ctrl.editbuttonvisible"
+          editmode="$ctrl.editmode" 
+          editfunction="$ctrl.editfunction()"
+          readfunction="$ctrl.readfunction()"
+          savefunction="$ctrl.savefunction()">
+        </editsavebackbuttonbar>
+      </span>
+    </div>
+
+</div>

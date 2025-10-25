@@ -1,0 +1,10 @@
+<div ng-if="$ctrl.strands" ng-repeat="strand in $ctrl.strands track by $index">
+    <projectexplorersimpletext 
+        text="strand.description"
+        path="/strands/{{strand.$loki}}/edit"
+        sectiontitle="strand.name">
+    </projectexplorersimpletext>
+</div>
+<div ng-if="!$ctrl.strands">
+    <i class="bibiscoNotSelectableText">{{ 'common_empty_section' | translate}}</i>
+</div>

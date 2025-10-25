@@ -1,0 +1,19 @@
+<pageheader 
+  changegroupfilterfunction="$ctrl.applyFilterGroup()"
+  headertitle="timeline_title" 
+  showgroupfilter="true"></pageheader>
+
+<div ng-show="$ctrl.timeline.length == 0">
+  <jumbotronbutton text="jsp.chapter.bibiscoEmptyThumbnailListBox.text" >
+  </jumbotronbutton>
+</div>
+
+<div ng-show="$ctrl.timeline.length > 0" class="scrollable-box-full-height-page-with-header">
+  <ul class="timeline timeline-scenes">
+    <timelineelement ng-repeat="timelineelement in $ctrl.timeline track by $index" 
+      index="($index % 12)" element="timelineelement" mode="view"></timelineelement>
+  </ul>
+</div>
+
+<pagefooter tipcode="timelineTip" tipenabled="true">
+</pagefooter>

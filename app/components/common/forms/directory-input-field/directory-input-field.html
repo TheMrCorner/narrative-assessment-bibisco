@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label class="col-sm-{{$ctrl.labelcols}} control-label" for="{{$ctrl.label}}">{{$ctrl.label | translate}}</label>
+  <div class="col-sm-{{$ctrl.inputcols}}">
+    <directoryselect model='$ctrl.model' field='$ctrl.field'
+    name='{{$ctrl.name}}' onselectdirectory='$ctrl.onselectdirectory({directory: directory})'
+    forbiddendirectory='$ctrl.forbiddendirectory' customerrormessage="$ctrl.customerrormessage">
+    </directoryselect>
+    <div ng-if="$ctrl.note" class="input-field-note">
+      <span class="label label-info">{{$ctrl.notebadge | translate}}</span>&nbsp;&nbsp;{{$ctrl.note | translate}}
+    </div>
+  </div>
+</div>

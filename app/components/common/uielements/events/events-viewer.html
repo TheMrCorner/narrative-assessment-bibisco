@@ -1,0 +1,32 @@
+<breadcrumb items="$ctrl.breadcrumbitems" imgoffset="$ctrl.profileimageenabled"></breadcrumb>
+<pageheader headertitle="{{$ctrl.title}}" headersubtitle="{{$ctrl.subtitle | translate}}"
+  image="{{$ctrl.profileimage}}" 
+  imageenabled="$ctrl.profileimageenabled" 
+  noimageicon="{{$ctrl.noprofileimageicon}}">
+</pageheader>
+
+<div class="scrollable-box-full-height-page-with-breadcrumb-header-subtitle-footer">
+  <div ng-if="$ctrl.timeline.length > 0">
+    <ul class="timeline timeline-scenes">
+      <timelineelement ng-repeat="timelineelement in $ctrl.timeline track by $index" 
+        deletefunction="$ctrl.delete(eventid)"
+        editfunction="$ctrl.editfunction({eventid})"
+        index="($index % 12)" element="timelineelement" mode="edit"></timelineelement>
+    </ul>
+  </div>
+  <div ng-if="$ctrl.timeline.length == 0">
+    <jumbotronbutton text="{{'events_emptylist' | translate}}" 
+      buttonlabel="{{'events_add_first_event' | translate}}" 
+      buttonfunction="$ctrl.insertfunction()"
+      buttontooltip="{{'events_add_first_event_tooltip'+$root.os | translate}}"></jumbotronbutton>
+  </div>
+</div>
+
+<pagefooter 
+  buttonlabel="events_add_event"
+  buttonfunction="$ctrl.insertfunction()"
+  buttonhotkey="$ctrl.hotkeys"
+  buttonshow="$ctrl.timeline && $ctrl.timeline.length > 0"
+  buttonstyle="{{$ctrl.insertbuttonstyle}}"
+  buttontooltip="{{'events_add_event_tooltip'+$root.os | translate}}">
+</pagefooter>

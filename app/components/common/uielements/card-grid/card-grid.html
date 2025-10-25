@@ -1,0 +1,50 @@
+<pageheader
+	changegroupfilterfunction="$ctrl.changegroupfilterfunction()"
+	headertitle="{{$ctrl.pageheadertitle}}"
+	headersubtitle="{{$ctrl.pageheadersubtitle}}"
+	characters="$ctrl.pageheadercharacters"
+	showgroupfilter="$ctrl.showgroupfilter"
+	showwordsgoalcounter="$ctrl.showwordsgoalcounter"
+	subheader="$ctrl.subheader"
+	words="$ctrl.pageheaderwords">
+</pageheader>
+
+<div ng-show="!$ctrl.items">
+	<jumbotronbutton text="{{$ctrl.emptylisttext}}"
+		buttonlabel="{{$ctrl.emptylistbuttonlabel}}"
+		buttonfunction="$ctrl.emptylistbuttonfunction()"
+		buttontooltip="{{$ctrl.emptylistbuttontooltip | translate}}"></jumbotronbutton>
+</div>
+
+<div ng-show="$ctrl.items && $ctrl.items.length===0 && $root.groupFilter && $root.groupFilter.key !== 'all'">
+	<jumbotronbutton text="{{$ctrl.emptyselectedgrouptext | translate}}"></jumbotronbutton>
+</div>
+
+<div ng-show="$ctrl.items && $ctrl.items.length > 0" class="{{$ctrl.cardgriditemsboxcontainerclass}}">
+	<div class="card-grid-items-box">
+		<card ng-repeat="item in $ctrl.items track by $index"
+			cardid="item.id" cardtitle="{{item.title}}"
+			dimension="{{$ctrl.carddimension}}"
+			dndenabled="$ctrl.dndenabled"
+			dropfunction="$ctrl.dropfunction({draggedObjectId, destinationObjectId})"
+			family="{{$ctrl.family}}"
+			hastext="$ctrl.hastext"
+			image="{{item.image}}"
+			noimageicon="{{item.noimageicon}}"
+			selectfunction="$ctrl.selectfunction({id})"
+			text="{{item.text}}" words="item.words" characters="item.characters"
+			status="item.status" tags="item.tags">
+		</card>
+	</div>
+</div>
+
+<pagefooter
+		buttonlabel="{{$ctrl.pageheaderbuttonlabel}}"
+		buttonfunction="$ctrl.pageheaderbuttonfunction()"
+		buttonhotkey="$ctrl.pageheaderbuttonhotkey"
+		buttonshow="$ctrl.items && $ctrl.pageheaderbuttonlabel"
+		buttontooltip="{{$ctrl.pageheaderbuttontooltip}}"
+		supportersonly="$ctrl.supportersonly"
+		tipcode="{{$ctrl.pageheadertipcode}}" 
+		tipenabled="$ctrl.tipenabled">
+</pagefooter>

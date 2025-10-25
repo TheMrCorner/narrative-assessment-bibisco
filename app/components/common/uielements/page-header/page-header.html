@@ -1,0 +1,53 @@
+<div class="page-header" ng-class="{ 'page-subheader' : $ctrl.subheader}">
+  <h1>
+      <span ng-if="$ctrl.imageenabled && $ctrl.image" 
+        ng-dblclick="$ctrl.executeimageseditfunction()"class="page-header-profile"> 
+        <img src="{{$ctrl.fullpathimage}}" class="img-rounded">
+      </span> 
+
+      <span ng-if="$ctrl.imageenabled && !$ctrl.image" 
+        ng-dblclick="$ctrl.executeimageaddfunction()"
+        class="page-header-no-profile">
+        <div class="page-header-no-profile-bg"></div>
+        <span class="page-header-no-profile-icon">
+          <i class="fa fa-{{$ctrl.noimageicon}}" ng-class="{'fa-inverse': $ctrl.theme === 'dark'}"></i>
+        </span>
+        <button class="btn btn-default btn-sm page-header-no-profile-button" 
+          ng-if="$ctrl.imageaddenabled" id="page-header-add-profile-image-se-marker"
+          ng-click="$ctrl.executeimageaddfunction()"
+          uib-tooltip="{{'add_profile_image_tooltip' | translate}}">
+          <sefeaturemarker insidebutton="true" ng-if="$root.ed==='ce'"></sefeaturemarker>+</button>
+      </span>
+
+      <span ng-class="{ 'editable-title': $ctrl.dblclickfunction}"
+        class="page-header-truncate-title page-header-tags-{{$ctrl.tagscluster}}" 
+        style="width: calc(100% - {{$ctrl.statusandbuttonsspace}}px)">
+        <i ng-repeat="tag in $ctrl.tags track by $index" 
+          class="fa fa-tag fa-flip-horizontal" ng-dblclick="$ctrl.groupseditfunction()"
+          uib-tooltip="{{tag.label | translate}}"  style="color: {{tag.color}};"></i>
+        <span ng-dblclick="$ctrl.dblclickfunction()">{{$ctrl.headertitle | translate}}</span>
+      </span>
+      <span class="pull-right page-header-buttonbar">
+        <small>
+          <taskstatusselector ng-if="$ctrl.taskstatus" 
+            status="$ctrl.taskstatus" 
+            readonly="$ctrl.taskstatusreadonly" 
+            changefunction="$ctrl.taskstatuschangefunction({status})"></taskstatusselector>
+          <wordscharacterscounter ng-if="$ctrl.words != null" 
+            words="$ctrl.words" characters="$ctrl.characters">
+          </wordscharacterscounter>
+          <wordsgoalcounter ng-if="$ctrl.showwordsgoalcounter"></wordsgoalcounter>
+          <groupfilter ng-if="$ctrl.showgroupfilter" changegroupfilterfunction="$ctrl.changegroupfilterfunction()"></groupfilter>
+        </small>
+      </span>
+  </h1>
+</div>
+<div ng-if="$ctrl.headersubtitle">
+  <blockquote>
+    <i>
+      <span class="page-header-subtitle page-subheader-truncate-title bibiscoNotSelectableText">
+        {{$ctrl.headersubtitle | translate}}
+      </span>
+    </i>
+  </blockquote>
+</div>

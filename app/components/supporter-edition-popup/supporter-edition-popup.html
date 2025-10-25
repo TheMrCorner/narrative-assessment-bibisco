@@ -1,0 +1,25 @@
+<modal-component modal-instance="$uibModalInstance" 
+  class="ng-scope ng-isolate-scope supporter-edition-popup">
+  <div class="modal-body" id="modal-body">
+    <h3>{{"only_for_supporter_edition" | translate}}</h3>
+    <p class="heart"><i class="fa fa-heart fa-4x"></i></p>
+    <blockquote>
+      <div class="row">
+        <div class="col-sm-3 text-center">
+          <img class="img-circle" src="images/andrea.jpg">
+        </div>
+        <div class="col-sm-9">
+          <p class="text-left"><i ng-bind-html="$ctrl.cta"></i></p>
+          <small class="text-left">Andrea Feccomandi, {{"author_of_bibisco" | translate}}</small>
+        </div>
+      </div>
+    </blockquote>
+  </div>
+  <div class="modal-footer bibiscoNotSelectableText">
+    <button class="btn btn-download" type="button" 
+      ng-click="$ctrl.getIt()">{{"se_download_button" | translate}}</button>
+    <button class="btn btn-default" type="button" ng-disabled="$ctrl.showcountdown"
+      ng-click="$ctrl.cancel()">{{"jsp.common.button.close" | translate}}
+      <span ng-if="$ctrl.showcountdown"> ({{$ctrl.countdown}})</span>
+  </div>
+</modal-component>

@@ -1,0 +1,87 @@
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_characters_personaldata"
+    type="'personaldata'"
+    info="$ctrl.maincharacter.personaldata">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_physionomy"
+    type="'physionomy'" 
+    info="$ctrl.maincharacter.physionomy">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_characters_behaviors"
+    type="'behaviors'" 
+    info="$ctrl.maincharacter.behaviors">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_characters_psychology"
+    type="'psychology'" 
+    info="$ctrl.maincharacter.psychology">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_characters_ideas"
+    type="'ideas'" 
+    info="$ctrl.maincharacter.ideas">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorermaincharacterinfo 
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_characters_sociology"
+    type="'sociology'" 
+    info="$ctrl.maincharacter.sociology">
+</projectexplorermaincharacterinfo>
+
+<hr ng-if="$ctrl.isSupporterOrTrial">
+<projectexplorermaincharacterinfo ng-if="$ctrl.isSupporterOrTrial"
+    characterid="$ctrl.maincharacter.$loki"
+    label="common_custom"
+    type="'custom'" 
+    info="$ctrl.maincharacter.custom">
+</projectexplorermaincharacterinfo>
+
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.maincharacter.lifebeforestorybeginning.text"
+    path="/maincharacters/{{$ctrl.maincharacter.$loki}}/infowithoutquestion/lifebeforestorybeginning/edit"
+    sectiontitle="'common_characters_lifebeforestorybeginning'">
+</projectexplorersimpletext>
+
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.maincharacter.conflict.text"
+    path="/maincharacters/{{$ctrl.maincharacter.$loki}}/infowithoutquestion/conflict/edit"
+    sectiontitle="'common_characters_conflict'">
+</projectexplorersimpletext>
+
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.maincharacter.evolutionduringthestory.text" 
+    path="/maincharacters/{{$ctrl.maincharacter.$loki}}/infowithoutquestion/evolutionduringthestory/edit"
+    sectiontitle="'common_characters_evolutionduringthestory'">
+</projectexplorersimpletext>
+
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.maincharacter.notes.text" 
+    path="/maincharacters/{{$ctrl.maincharacter.$loki}}/infowithoutquestion/notes/edit"
+    sectiontitle="'common_characters_notes'">
+</projectexplorersimpletext>
+
+<hr ng-if="$ctrl.maincharacter.images && $ctrl.maincharacter.images.length>0">
+<projectexplorerimages images="$ctrl.maincharacter.images"></projectexplorerimages>
+<hr ng-if="$ctrl.timeline && $ctrl.timeline.length>0">
+<projectexplorerevents timeline="$ctrl.timeline"></projectexplorerevents>

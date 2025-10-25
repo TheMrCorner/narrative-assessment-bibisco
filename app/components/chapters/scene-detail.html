@@ -1,0 +1,79 @@
+<detailheader breadcrumbitems="$ctrl.breadcrumbitems" 
+  dblclickfunction="$ctrl.changetitle()"
+  headertitle="{{$ctrl.title}}" 
+  tags="$ctrl.grouptags"
+  taskstatus="$ctrl.scene.status" 
+  taskstatuschangefunction="$ctrl.changeStatus(status)">
+</detailheader>
+
+<detailcontent 
+  autosaveenabled="$ctrl.autosaveenabled" 
+  characters="$ctrl.scenerevision.characters" 
+  content="$ctrl.content" 
+  editfunction="$ctrl.edit()"
+  editmode="$ctrl.editmode"
+  previouselementlabel="{{$ctrl.previouselementtooltip}}"
+  previouselementlink="$ctrl.previouselementlink"
+  previouselementtooltip="previous_scene"
+  nextelementlabel="{{$ctrl.nextelementtooltip}}"
+  nextelementlink="$ctrl.nextelementlink"
+  nextelementtooltip="next_scene"
+  showprojectexplorer="$root.showprojectexplorer" 
+  todaywords="$ctrl.todaywords"
+  totalwords="$ctrl.totalwords"
+  words="$ctrl.scenerevision.words">
+</detailcontent>
+
+<div class="detail-footer bibiscoNotSelectableText">
+  <detailfootertop 
+    autosaveenabled="$ctrl.autosaveenabled" 
+    characters="$ctrl.scenerevision.characters" 
+    content="$ctrl.content" 
+    editmode="$ctrl.editmode"
+    lastsave="$ctrl.scene.lastsave" 
+    todaywords="$ctrl.todaywords"
+    totalwords="$ctrl.totalwords"
+    words="$ctrl.scenerevision.words",
+    wordscharactersenabled="true". 
+    wordsgoal="$ctrl.wordsGoal",
+    wordsperdaygoal="$ctrl.wordsPerDayGoal">
+  </detailfootertop>
+  <div class="row">
+    <span class="pull-left">
+      <projectexplorerbutton></projectexplorerbutton>
+      <button
+        type="button" 
+        class="btn btn-default" 
+        uib-tooltip="{{'tags_tooltip'+$root.os | translate}}"
+        ng-click="$ctrl.tags()">{{'jsp.scene.button.tags' | translate}}</button>
+      <revisionselect
+        class="btn-group" 
+        autosaveenabled="$ctrl.autosaveenabled" 
+        editmode="$ctrl.editmode"
+        revisionactive="$ctrl.scene.revision" 
+        revisioncount="$ctrl.scene.revisions.length" 
+        revisionenabled="true" 
+        revisionfunction="$ctrl.changerevision(action,revision)"
+        savefunction="$ctrl.save()">
+      </revisionselect>
+    </span>
+    <span class="pull-right">
+      <contextualtipbutton ng-if="$ctrl.editmode" modalstyle="richtexteditortip"
+        tipcode="{{$ctrl.tip}}"></contextualtipbutton>
+      <dropdownmenu 
+        buttonlabel="jsp.common.button.more" 
+        items="$ctrl.actionitems" 
+        open="up"
+        visible="true">
+      </dropdownmenu>
+      <editsavebackbuttonbar 
+        autosaveenabled="$ctrl.autosaveenabled" 
+        editbuttonvisible="true" 
+        editfunction="$ctrl.edit()"
+        editmode="$ctrl.editmode" 
+        readfunction="$ctrl.read()"
+        savefunction="$ctrl.save()">
+      </editsavebackbuttonbar>
+    </span>
+  </div>
+</div>

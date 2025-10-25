@@ -1,0 +1,28 @@
+<questionselect questionselected="$ctrl.questionselected" 
+  questionselectedchanged="$ctrl.questionselected" 
+  questioncount="$ctrl.maincharacter[$ctrl.type].questions.length"
+  type="$ctrl.type">
+</questionselect>
+<hr class="intervieweditor-hr" />
+
+<questioneditor 
+  autosaveenabled="$ctrl.autosaveenabled"
+  content="$ctrl.content" 
+  characters="$ctrl.characters" 
+  maincharacter="$ctrl.maincharacter"
+  previouselementlabel="{{$ctrl.previouselementlabel}}"
+  previouselementlink="$ctrl.previouselementlink"
+  previouselementtooltip="{{$ctrl.previouselementtooltip}}"
+  nextelementlabel="{{$ctrl.nextelementlabel}}"
+  nextelementlink="$ctrl.nextelementlink"
+  nextelementtooltip="{{$ctrl.nextelementtooltip}}"
+  questionselected="$ctrl.questionselected" 
+  type="$ctrl.type" 
+  words="$ctrl.words">
+</questioneditor>
+<hr class="intervieweditor-hr" />
+
+<questionbuttonbar 
+  questionselected="$ctrl.questionselected" 
+  questioncount="$ctrl.maincharacter[$ctrl.type].questions.length">
+</questionbuttonbar>

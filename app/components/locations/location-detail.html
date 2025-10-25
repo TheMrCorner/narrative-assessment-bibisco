@@ -1,0 +1,40 @@
+<elementdetail
+  breadcrumbitems="$ctrl.breadcrumbitems"
+  changetitleenabled="true"
+  changetitlefunction="$ctrl.changeTitle()"
+  changetitlelabel="jsp.location.button.updateTitle"
+  characters="$ctrl.location.characters"
+  content="$ctrl.location.description"
+  custombuttonenabled="true",
+  custombuttonfunction="$ctrl.managegroupsmembership()",
+  custombuttonlabel="groups_button",
+  custombuttontooltip="{{'groups_memberships_tooltip'+$root.os}}",
+  deleteconfirmmessage="jsp.locations.delete.confirm"
+  deleteenabled="true"
+  deleteforbidden="$ctrl.deleteforbidden"
+  deleteforbiddenmessage="jsp.locations.delete.ko"
+  deletefunction="$ctrl.delete()"
+  editmode="$ctrl.mode === 'edit'"
+  editfunction="$ctrl.edit()"
+  eventname="SHOW_ELEMENT_DETAIL"
+  eventsenabled="true"
+  groupsmembershipfunction="$ctrl.managegroupsmembership()"
+  headertitle="{{$ctrl.name}}"
+  imagesenabled="true"
+  lastsave="$ctrl.location.lastsave"
+  noprofileimageicon="map-marker"
+  profileimage="{{$ctrl.location.profileimage}}"
+  profileimageenabled="true"
+  profileimagefunction="$ctrl.addprofileimage()"
+  readfunction="$ctrl.read()"
+  savefunction="$ctrl.savefunction()"
+  showeventsfunction="$ctrl.showeventsfunction()"
+  showeventslabel="{{'location_events_tooltip'+$root.os}}"
+  showimagesfunction="$ctrl.showimagesfunction()"
+  showimageslabel="{{'location_images_tooltip'+$root.os}}"
+  tags="$ctrl.tags"
+  taskstatus="$ctrl.location.status"
+  taskstatuschangefunction="$ctrl.changeStatus(status)"
+  words="$ctrl.location.words"
+  wordscharactersenabled="true">
+</elementdetail>

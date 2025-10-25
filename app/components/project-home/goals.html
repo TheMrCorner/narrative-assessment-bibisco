@@ -1,0 +1,52 @@
+<breadcrumb items="$ctrl.breadcrumbitems"></breadcrumb>
+<pageheader headertitle="goals_title"></pageheader>
+
+<div class="col-sm-12">
+  <form name="goalsForm" ng-submit="$ctrl.save(goalsForm.$valid)" class="form-horizontal" novalidate>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="{{$ctrl.label}}">{{"goals_deadline_label" | translate}}</label>
+        <div class="col-sm-4" ng-class="{ 'has-error': $ctrl.hasError() }">
+          <div class="dropdown" uib-dropdown is-open="$ctrl.deadlineCalendarOpen">
+            <div class="input-group">
+              <input type="text" name="date" class="form-control" readonly focus-if="true"
+                ng-click="$ctrl.openCalendar($event)"
+                value="{{'date_format' | translate:{date:$ctrl.deadline} }}" class="bibiscoNotSelectableText">
+              <span class="input-group-btn">
+                <button type="button" id="openCalendarBtn" role="button" uib-dropdown-toggle 
+                  class="btn btn-default dropdown-toggle goalsOpenCalendarBtn">
+                  <i class="fa fa-calendar"></i>
+                </button>
+                <button type="button" class="btn btn-default" uib-tooltip="{{'clear_text2replace' | translate}}"
+                  ng-click="$ctrl.clearDeadline()">
+                  <i class="fa fa-close"></i>
+                </button>
+              </span>
+            </div>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" uib-dropdown>
+              <datetimepicker data-ng-model="$ctrl.deadline"
+                datetimepicker-config="{startView: 'year', minView: 'day'}"
+                data-before-render="$ctrl.beforeRender($view, $dates, $leftDate, $upDate, $rightDate)"
+                data-on-set-time="$ctrl.onTimeSet(newDate, oldDate)"></datetimepicker>
+            </ul>
+          </div>
+      </div>
+    </div>
+    <numberinputfield field="goalsForm.wordsGoal"
+      model="$ctrl.wordsGoal" name="wordsGoal" 
+      label="common_words_label" maxlength="12" 
+      labelcols="3" inputcols="4">
+    </numberinputfield>
+    <numberinputfield field="goalsForm.wordsPerDayGoal"
+      model="$ctrl.wordsPerDayGoal" name="wordsPerDayGoal"
+      label="goals_words_per_day_label" maxlength="12" 
+      labelcols="3" inputcols="4" 
+      btnenabled="$ctrl.deadline && $ctrl.wordsGoal"
+      btnfunction="$ctrl.calculateWordsPerDayGoal()"
+      btnlabel="goals_calculate" btntooltip="goals_calculate_tooltip">
+    </numberinputfield>
+    <formbuttons form="goalsForm">
+    </formbuttons>
+  </form>
+</div>
+
+

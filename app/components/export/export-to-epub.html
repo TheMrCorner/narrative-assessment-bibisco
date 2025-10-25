@@ -1,0 +1,107 @@
+<breadcrumb items="$ctrl.breadcrumbitems"></breadcrumb>
+<pageheader headertitle="{{$ctrl.pageheadertitle}}">
+  </pageheader>
+
+
+<div class="scrollable-box-full-height-page-with-breadcrumb-header">
+    <div class="col-sm-12">
+      <form name="exportToEpubForm" class="form-horizontal" ng-submit="$ctrl.export(exportToEpubForm.$valid)" novalidate>
+        <textinputfield field="exportToEpubForm.author" model="$ctrl.author"
+          name="author" autofocus required="true" label="common_author" labelcols="3" inputcols="8">
+        </textinputfield>
+        <textinputfield field="exportToEpubForm.publisher" model="$ctrl.publisher"
+          name="publisher" required="false" label="epub_publisher" labelcols="3" inputcols="8">
+        </textinputfield>
+        <textinputfield field="exportToEpubForm.copyright" model="$ctrl.copyright"
+          name="copyright" required="false" label="epub_copyright" labelcols="3" inputcols="8"
+          placeholder="epub_copyright_placeholder">
+        </textinputfield>
+        <textinputfield field="exportToEpubForm.rights" model="$ctrl.rights"
+          name="rights" required="false" label="epub_rights" labelcols="3" inputcols="8"
+          placeholder="epub_rights_placeholder">
+        </textinputfield>
+        <textinputfield field="exportToEpubForm.isbn" model="$ctrl.isbn"
+          name="isbn" required="false" label="epub_isbn" labelcols="3" inputcols="8">
+        </textinputfield>
+        <urlinputfield field="exportToEpubForm.website" model="$ctrl.website"
+          name="website" required="false" label="epub_website" labelcols="3" inputcols="8">
+        </urlinputfield>
+        <div class="form-group">
+          <label class="col-sm-3 control-label control-label" for="coverimage">{{'epub_cover_image' | translate}}</label>
+          <div class="col-sm-8">
+            <div class="input-group">
+              <input name="coverimage" class="form-control" type="text" readonly="readonly" ng-model="$ctrl.coverImage"
+                placeholder="{{'epub_cover_image_placeholder' | translate}}"/>
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="$ctrl.selectCoverImage()">{{'jsp.common.button.select' | translate}}</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div ng-if="!$ctrl.advancedsettings" class="form-group">
+          <div class="col-sm-8 col-sm-offset-3">
+            <a class="btn btn-xs btn-primary" ng-click="$ctrl.showadvancedsettings()">{{'show_advanced_settings' | translate}}</a>
+          </div>
+        </div>
+        <div ng-if="$ctrl.advancedsettings" class="form-group">
+          <div class="col-sm-8 col-sm-offset-3">
+            <a class="btn btn-xs btn-default" ng-click="$ctrl.hideadvancedsettings()">{{'hide_advanced_settings' | translate}}</a>
+          </div>
+        </div>
+        <div ng-if="$ctrl.advancedsettings">
+        <formdivider labelcols="3" inputcols="8"></formdivider>
+        <buttongroupfield group="$ctrl.chaptertitleformatgroup" label="chapter_title_format"
+          onclickbutton="$ctrl.changechaptertitleformat(selected)"  
+          model="$ctrl.chaptertitleformat" labelcols="3" inputcols="8" form="exportToEpubForm">
+        </buttongroupfield>
+        <div class="form-group chapter-title-format-example">
+          <div class="col-sm-8 col-sm-offset-3">
+            <span class="label label-info">{{'example' | translate}}</span><span> {{$ctrl.chaptertitleexample}}</span>
+          </div>
+        </div>
+        <buttongroupfield group="$ctrl.chaptertitlepositiongroup" label="chapter_title_position"
+            model="$ctrl.chaptertitleposition" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <buttongroupfield group="$ctrl.sceneseparatorgroup" label="scene_separator"
+            model="$ctrl.sceneseparator" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <buttongroupfield group="$ctrl.exportscenetitlegroup" label="export_scene_title"
+            model="$ctrl.exportscenetitle" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <buttongroupfield ng-if="$ctrl.exportscenetitle === 'true'" group="$ctrl.scenetitleformatgroup" label="scene_title_format"
+            model="$ctrl.scenetitleformat" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <buttongroupfield ng-if="$ctrl.exportscenetitle === 'true'" group="$ctrl.scenetitlepositiongroup" label="scene_title_position"
+          model="$ctrl.scenetitleposition" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <buttongroupfield 
+            group="$ctrl.footendnotegroup" label="note_export_mode"
+            model="$ctrl.footendnotemode" labelcols="3" inputcols="8" form="exportToEpubForm"></buttongroupfield>
+        <textinputfield 
+          ng-if="$ctrl.footendnotemode === 'bookend'" field="exportToEpubForm.bookendtitle" model="$ctrl.bookendtitle"
+          name="bookendtitle" autofocus label="bookend_title" labelcols="3" inputcols="8">
+        </textinputfield>
+        <formdivider labelcols="3" inputcols="8"></formdivider>
+        <buttongroupfield group="$ctrl.indentgroup" label="jsp.richTextEditorSettings.indentParagraph"
+          model="$ctrl.indent" labelcols="3" inputcols="8" form="exportToFormatForm"></buttongroupfield>
+        <buttongroupfield group="$ctrl.linespacinggroup" label="linespacing"
+          model="$ctrl.linespacing" labelcols="3" inputcols="8" form="exportToFormatForm"></buttongroupfield>
+        <buttongroupfield group="$ctrl.paragraphspacinggroup" label="paragraphspacing"
+          model="$ctrl.paragraphspacing" labelcols="3" inputcols="8" form="exportToFormatForm"></buttongroupfield>
+        </div>
+        <formdivider labelcols="3" inputcols="8"></formdivider>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" 
+            for="exportpath">{{'jsp.export.dialog.title.exportProjectDirectory' | translate}}</label>
+          <div class="col-sm-8">
+            <directoryselect model='$ctrl.exportpath' 
+              defaultpath="$ctrl.exportdefaultpath"
+              field='exportToEpubForm.exportpath' 
+              name='exportpath' 
+              placeholder='jsp.export.dialog.exportProjectDirectory.label'
+              onselectdirectory='$ctrl.selectProjectsDirectory(directory)'
+              forbiddendirectory='$ctrl.forbiddenDirectory' required>
+            </directoryselect>
+          </div>
+        </div>
+
+        <formbuttons form="exportToEpubForm" saving="$ctrl.saving">
+        </formbuttons>
+      </form>
+    </div>
+</div>

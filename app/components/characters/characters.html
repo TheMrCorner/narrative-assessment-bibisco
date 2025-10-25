@@ -1,0 +1,58 @@
+<pageheader headertitle="{{'common_characters'| translate}}" 
+    changegroupfilterfunction="$ctrl.refreshCardGridItems()"
+    showgroupfilter="$ctrl.showGroupFilter"></pageheader>
+
+<div class="scrollable-box-full-height-page-with-header">
+  <div class="topminus20"></div> <!-- SPACE REDUCER -->
+
+  <!-- MAIN CHARACTERS -->
+  <cardgrid
+    carddimension="small"
+    dndenabled="true"
+    dropfunction="$ctrl.mainCharacterMove(draggedObjectId, destinationObjectId)"
+    family="maincharacters"
+    emptylisttext="jsp.characters.bibiscoEmptyThumbnailListBox.text.main"
+    emptylistbuttonlabel="jsp.characters.a.createFirstMainCharacter"
+    emptylistbuttonfunction="$ctrl.createMainCharacter()"
+    emptylistbuttontooltip="{{'maincharacter_firstcreate_tooltip'+$root.os}}"
+    emptyselectedgrouptext="no_characters_in_selected_group"
+    items="$ctrl.maincharacterscardgriditems"
+    pageheadertitle="common_main_characters"
+    pageheadersubtitle="jsp.characters.h1.small.main"
+    scrollable="false"
+    selectfunction="$ctrl.mainCharacterSelect(id)"
+    subheader="true"></cardgrid>
+
+  <div class="top30"></div> 
+
+  <!-- SECONDARY CHARACTERS -->
+  <cardgrid
+    carddimension="small"
+    dndenabled="true"
+    dropfunction="$ctrl.secondaryCharacterMove(draggedObjectId, destinationObjectId)"
+    family="secondarycharacters"
+    emptylisttext="jsp.characters.bibiscoEmptyThumbnailListBox.text.secondary"
+    emptylistbuttonlabel="jsp.characters.a.createFirstSecondaryCharacter"
+    emptylistbuttonfunction="$ctrl.createSecondaryCharacter()"
+    emptylistbuttontooltip="{{'secondarycharacter_firstcreate_tooltip'+$root.os}}"
+    emptyselectedgrouptext="no_characters_in_selected_group"
+    items="$ctrl.secondarycharacterscardgriditems"
+    pageheadertitle="common_secondary_characters"
+    pageheadersubtitle="jsp.characters.h1.small.secondary"
+    scrollable="false"
+    selectfunction="$ctrl.secondaryCharacterSelect(id)"
+    subheader="true"></cardgrid>
+
+</div>
+
+<pagefooter buttonlabel="{{'jsp.characters.a.createMainCharacter' | translate}}"
+    buttonfunction="$ctrl.createMainCharacter()" buttonshow="$ctrl.maincharacterscardgriditems"
+    buttonstyle="primary" buttontooltip="{{'maincharacter_create_tooltip'+$root.os}}"
+    buttonhotkey="$ctrl.maincharacterhotkeys"
+    button2label="{{'jsp.characters.a.createSecondaryCharacter' | translate}}"
+    button2function="$ctrl.createSecondaryCharacter()" button2show="$ctrl.secondarycharacterscardgriditems"
+    button2style="default" button2tooltip="{{'secondarycharacter_create_tooltip'+$root.os}}"
+    button2hotkey="$ctrl.secondarycharacterhotkeys"
+    tipcode="charactersdndTip" 
+    tipenabled="($ctrl.maincharacterscardgriditems && $ctrl.maincharacterscardgriditems.length > 1) || ($ctrl.secondarycharacterscardgriditems && $ctrl.secondarycharacterscardgriditems.length > 1)">
+</pagefooter>

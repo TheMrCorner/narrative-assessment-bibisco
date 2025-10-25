@@ -1,0 +1,22 @@
+<div ng-if="$ctrl.scenes.length > 0" ng-repeat="scene in $ctrl.scenes track by $index">
+    <projectexplorersimpletext 
+        text="scene.revisions[scene.revision].text"
+        path="/chapters/{{$ctrl.chapter.$loki}}/scenes/{{scene.$loki}}/edit"
+        sectiontitle="scene.title">
+    </projectexplorersimpletext>
+</div>
+<div ng-if="$ctrl.scenes.length == 0">
+    <i class="bibiscoNotSelectableText">{{ 'common_empty_section' | translate}}</i>
+</div>
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.chapter.reason.text"
+    path="/chapters/{{$ctrl.chapter.$loki}}/chapterinfos/reason/edit"
+    sectiontitle="'common_chapter_reason'">
+</projectexplorersimpletext>
+<hr>
+<projectexplorersimpletext 
+    text="$ctrl.chapter.notes.text"
+    path="/chapters/{{$ctrl.chapter.$loki}}/chapterinfos/notes/edit"
+    sectiontitle="'common_chapter_notes'">
+</projectexplorersimpletext>

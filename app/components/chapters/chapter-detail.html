@@ -1,0 +1,95 @@
+<!-- HEADER -->
+<detailheader
+  breadcrumbitems="$ctrl.breadcrumbitems" 
+  buttonhotkey="$ctrl.hotkeys"
+  buttonlabel="jsp.chapter.a.createScene"
+  buttonfunction="$ctrl.createScene()"
+  buttonshow="$ctrl.scenescardgriditems"
+  buttonstyle="primary"
+  buttontooltip="{{'scene_create_tooltip'+$root.os}}"
+  characters="$ctrl.chapter.characters" 
+  dblclickfunction="$ctrl.changeTitle()"
+  editmode="false"
+  headertitle="{{$ctrl.title}}" 
+  tags="$ctrl.grouptags"
+  taskstatusreadonly="true"
+  taskstatus="$ctrl.chapter.status" 
+  words="$ctrl.chapter.words">
+</detailheader>
+
+<div class="scrollable-box-full-height-page-with-breadcrumb-header-footer">
+  
+  <!-- REASON AND NOTES -->
+  <div class="card-grid-items-box">
+    <card cardid="'reason'" cardtitle="jsp.chapter.thumbnail.reason.title"
+      dimension="normal"
+      dndenabled="false"
+      family="chapterinfo"
+      hastext="true"
+      noimageicon="map-o"
+      selectfunction="$ctrl.selectChapterInfo(id)"
+      text="jsp.chapter.thumbnail.reason.description"
+      status="$ctrl.chapter.reason.status"></card>
+    <card cardid="'notes'" cardtitle="common_notes_title"
+      dimension="normal"
+      dndenabled="false"
+      hastext="true"
+      family="chapterinfo"
+      noimageicon="thumb-tack"
+      selectfunction="$ctrl.selectChapterInfo(id)"
+      text="common_notes_description"></card>
+    <card cardid="'sinopsis'" cardtitle="jsp.chapter.thumbnail.sinopsis.title"
+      dimension="normal"
+      dndenabled="false"
+      family="chapterinfo"
+      hastext="true"
+      noimageicon="thumb-tack"
+      selectfunction="$ctrl.selectChapterInfo(id)"
+      text="jsp.chapter.thumbnail.sinopsis.description"></card>
+  </div>
+
+  <!-- SCENES -->
+  <cardgrid
+    carddimension="chapter"
+    dndenabled="true"
+    dropfunction="$ctrl.moveScene(draggedObjectId, destinationObjectId)"
+    family="scenes"
+    emptylisttext="jsp.chapter.bibiscoEmptyThumbnailListBox.text"
+    emptylistbuttonlabel="jsp.chapter.a.createFirstScene"
+    emptylistbuttonfunction="$ctrl.createScene()"
+    emptylistbuttontooltip="{{'scene_firstcreate_tooltip'+$root.os}}"
+    hastext="true"
+    items="$ctrl.scenescardgriditems"
+    pageheadertitle="jsp.chapter.scene.h2"
+    scrollable="false"
+    selectfunction="$ctrl.selectScene(id)"
+    subheader="true"></cardgrid>
+</div>
+
+<!-- FOOTER -->
+<div class="detail-footer bibiscoNotSelectableText">
+  <detailfootertop 
+    wordscharactersenabled="false">
+  </detailfootertop>
+  <div class="row">
+    <span class="pull-left">
+      <button ng-if="$ctrl.scenescardgriditems && $ctrl.scenescardgriditems.length > 0" 
+        type="button" class="btn btn-default"
+        ng-click="$ctrl.showChapterRead()" uib-tooltip="{{'read_the_chapter_tooltip'+$root.os | translate}}">
+        {{'read_the_chapter'| translate}}<sefeaturemarker ng-if="$root.ed==='ce'"></sefeaturemarker></button>
+    </span>
+    <span class="pull-right">
+      <contextualtipbutton ng-if="!$ctrl.scenescardgriditems || $ctrl.scenescardgriditems.length === 1" 
+        tipcode="chapteredittitleTip"></contextualtipbutton>
+      <contextualtipbutton ng-if="$ctrl.scenescardgriditems && $ctrl.scenescardgriditems.length > 1" 
+        tipcode="scenesdndTip"></contextualtipbutton>
+      <dropdownmenu buttonlabel="jsp.common.button.more" 
+        items="$ctrl.actionitems" open="up" visible="true">
+      </dropdownmenu>
+      <button ng-if="$ctrl.scenescardgriditems && $ctrl.scenescardgriditems.length > 0"  type="button" class="btn btn-primary"
+        ng-click="$ctrl.createScene()" uib-tooltip="{{'scene_create_tooltip'+$root.os | translate}}">
+        {{'jsp.chapter.a.createScene' | translate}}</button>
+      <buttonback></buttonback>
+    </span>
+  </div>
+</div>

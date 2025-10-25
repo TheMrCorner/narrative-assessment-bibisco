@@ -1,0 +1,24 @@
+<cardgrid
+  changegroupfilterfunction="$ctrl.refreshCardGridItems()"
+  carddimension="normal"
+  dndenabled="true"
+  dropfunction="$ctrl.move(draggedObjectId, destinationObjectId)"
+  emptylisttext="jsp.locations.bibiscoEmptyThumbnailListBox.text"
+  emptylistbuttonlabel="jsp.locations.a.createFirstLocation"
+  emptylistbuttonfunction="$ctrl.create()"
+  emptylistbuttontooltip="{{'location_firstcreate_tooltip'+$root.os}}"
+  emptyselectedgrouptext="no_locations_in_selected_group"
+  family="locations"
+  hastext="true"
+  items="$ctrl.cardgriditems"
+  pageheaderbuttonhotkey="$ctrl.hotkeys"
+  pageheaderbuttonlabel="jsp.locations.a.createLocation"
+  pageheaderbuttonfunction="$ctrl.create()"
+  pageheaderbuttontooltip="{{'location_create_tooltip'+$root.os}}"
+  pageheadertitle="jsp.locations.h1"
+  pageheadertipcode="locationsdndTip"
+  scrollable="true"
+  selectfunction="$ctrl.select(id)"
+  showgroupfilter="$ctrl.showGroupFilter">
+</cardgrid>
+

@@ -1,0 +1,49 @@
+<modal-component modal-instance="$uibModalInstance" class="ng-scope ng-isolate-scope">
+  <div class="modal-header ng-scope">
+      <h3 class="modal-title" id="modal-title">{{'tag.bibiscoRichTextEditor.dialog.richTextEditorSettings.title' | translate}}</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <form name="richTextEditorSettingsForm" class="form-horizontal" novalidate>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" 
+              for="exportpath">{{'jsp.richTextEditorSettings.font' | translate}}<sefeaturemarker ng-if="$root.ed==='ce'"></sefeaturemarker></label>
+            <div class="col-sm-7">
+              <ui-select ng-model="$ctrl.font" on-select="$ctrl.selectItem($select.selected.value)">
+                <ui-select-match placeholder="{{'common_select_or_search' | translate}}...">
+                  <span class="project-explorer-select {{$select.selected.buttonclass}} ">{{$select.selected.label | translate}}</span>
+                </ui-select-match>
+                <ui-select-choices 
+                  repeat="item in $ctrl.fontgroup | filter: $select.search">
+                  <span ng-bind-html="item.label | translate | highlight: $select.search" 
+                    class="{{item.buttonclass}}"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+          <buttongroupfield group="$ctrl.fontsizegroup" label="font_size"
+            model="$ctrl.fontsize" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+          <buttongroupfield group="$ctrl.indentgroup" label="jsp.richTextEditorSettings.indentParagraph"
+            model="$ctrl.indent" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+          <buttongroupfield group="$ctrl.autocapitalizegroup" label="autocapitalize"
+            model="$ctrl.autocapitalize" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+          <buttongroupfield group="$ctrl.linespacinggroup" label="linespacing"
+            model="$ctrl.linespacing" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+          <buttongroupfield group="$ctrl.paragraphspacinggroup" label="paragraphspacing"
+            model="$ctrl.paragraphspacing" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+          <buttongroupfield group="$ctrl.spellcheckgroup" label="jsp.richTextEditorSettings.spellCheck"
+            model="$ctrl.spellcheck" labelcols="4" inputcols="7" form="richTextEditorSettingsForm"></buttongroupfield>
+      </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer bibiscoNotSelectableText">
+    <button class="btn btn-primary" type="button" 
+      uib-tooltip="{{'jsp.common.button.save.tooltip' | translate}}"
+      ng-click="$ctrl.ok()">{{"jsp.common.button.save" | translate}}</button>
+    <button class="btn btn-default" type="button" 
+      uib-tooltip="{{'back_button_tooltip'+$root.os | translate}}"
+      ng-click="$ctrl.cancel()">{{"jsp.common.button.back" | translate}}</button>
+  </div>
+</modal-component>
