@@ -236,6 +236,8 @@
   "scene_firstcreate_tooltip_mac": "create the first scene (CMD+N)",
   "jsp.chapter.thumbnail.reason.title": "Reason",
   "jsp.chapter.thumbnail.reason.description": "What role does this chapter play? How does it contribute to the development of the novel?",
+  "jsp.chapter.thumbnail.sinopsis.title": "Sinopsis",
+  "jsp.chapter.thumbnail.sinopsis.description": "Full sinopsis of the chapter. What happens in it? What characters are involved? What do they do?",
   "common_notes_title": "Notes",
   "common_notes_description": "Ideas, notes, cues....",
   "jsp.chapter.scene.h2": "Scenes",

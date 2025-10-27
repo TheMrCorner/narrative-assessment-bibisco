@@ -29,8 +29,6 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
   checkApiStatus();
 
   return {
-    $onInit: function() {
-    },
     load_project: function(projectId) {
         const deferred = $q.defer();
 
@@ -67,7 +65,7 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
         
         return deferred.promise;
     },
-    assess: function(projectId) {
+    assess: function(projectId, text) {
         return null;
     }
   };
