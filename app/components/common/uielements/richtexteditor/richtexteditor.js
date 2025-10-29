@@ -37,7 +37,7 @@ angular.
 function RichTextEditorController($document, $injector, $rootScope, 
   $scope, $timeout, $uibModal, $window, hotkeys, BibiscoPropertiesService, Chronicle, ContextService, 
   FullScreenService, ImageService, PopupBoxesService, ProjectService, SanitizeHtmlService, SupporterEditionChecker, 
-  RichTextEditorPreferencesService, UtilService, UuidService, WordCharacterCountService) {
+  RichTextEditorPreferencesService, UtilService, UuidService, WordCharacterCountService, LoggerService, AssessmentService) {
 
   let self = this;
   const { shell } = require('electron');
@@ -417,6 +417,29 @@ function RichTextEditorController($document, $injector, $rootScope,
     self.savedcontent = self.content;
     self.savedcharacters = self.characters;
     self.savedwords = self.words;
+  });
+
+  $rootScope.$on('ASSESS_TEXT', function() {
+    LoggerService.info(self.savedcontent);
+    LoggerService.info(ProjectService.getProjectInfo().id);
+    
+    // Call the assessment service and handle the promise
+    AssessmentService.assess(ProjectService.getProjectInfo().id, self.savedcontent)
+      .then(function(data) {
+        LoggerService.info('Assessment completed successfully');
+        LoggerService.info('Full assessment data: ' + JSON.stringify(data));
+        
+        if (data && data.assessment) {
+          LoggerService.info('Assessment result: ' + data.assessment);
+          // TODO: Display assessment result to user (e.g., in a modal or sidebar)
+        } else {
+          LoggerService.warn('No assessment result found in response data');
+        }
+      })
+      .catch(function(error) {
+        LoggerService.error('Assessment failed:', error);
+        // TODO: Show error message to user
+      });
   });
 
   self.blur = function() {

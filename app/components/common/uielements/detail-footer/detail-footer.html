@@ -11,7 +11,7 @@
     </detailfootertop>
     <div class="row">
       <span class="pull-left">
-        <!--<projectexplorerbutton></projectexplorerbutton>-->
+        <projectexplorerbutton></projectexplorerbutton>
         <imagesbutton showimagesfunction="$ctrl.showimagesfunction()" showimageslabel="{{$ctrl.showimageslabel}}" visible="$ctrl.imagesenabled"></imagesbutton>
         <eventsbutton showeventsfunction="$ctrl.showeventsfunction()" showeventslabel="{{$ctrl.showeventslabel}}" visible="$ctrl.eventsenabled"></eventsbutton>
         <tagsbutton showtagsfunction="$ctrl.showtagsfunction()" showtagslabel="{{$ctrl.showtagslabel}}" visible="$ctrl.tagsenabled"></tagsbutton>
@@ -22,7 +22,7 @@
         </button>
       </span>
       <span class="text-center" style="position: absolute; left: 50%; transform: translateX(-50%);">
-        <projectexplorerbutton></projectexplorerbutton>
+        <assessmentbutton></assessmentbutton>
       </span>
       <span class="pull-right">
         <contextualtipbutton ng-if="$ctrl.tipenabled" modalstyle="{{$ctrl.tipmodalstyle}}"
