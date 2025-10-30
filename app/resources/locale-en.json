@@ -1316,5 +1316,8 @@
   "next_chapter": "next chapter",
   "previous_chapter": "previous chapter",
   "next_section": "next section",
-  "previous_section": "previous section"
+  "previous_section": "previous section",
+  "assessment_placeholder_text": "Here will appear the analysis of your text",
+  "assessment_button_text": "Analyze",
+  "assessment_textbox_title": "Analysis"
 }

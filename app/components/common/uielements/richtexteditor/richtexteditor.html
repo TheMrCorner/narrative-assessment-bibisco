@@ -1,5 +1,7 @@
-<div style="display: flex; flex-direction: column; height: 100%;">
-  <div class="btn-toolbar bibiscoNotSelectableText richtexteditor-toolbar" style="flex: 0;">
+<div style="display: flex; flex-direction: row; height: 100%;">
+  <!-- Main editor area -->
+  <div style="display: flex; flex-direction: column; flex: 1; height: 100%;">
+    <div class="btn-toolbar bibiscoNotSelectableText richtexteditor-toolbar" style="flex: 0;">
     <div class="btn-group">
       <button class="btn btn-default btn-sm" ng-click="$ctrl.undo()"
         uib-tooltip="{{'tag.bibiscoRichTextEditor.undo'+$ctrl.os | translate}}">
@@ -354,6 +356,28 @@
       nextelementtooltip="{{$ctrl.nextelementtooltip}}">
     </siblingelementsnavigator>
   </div>
+  </div>
+
+  <div class="assessment-panel" style="flex: 0 0 240px; margin-left: 12px; display: flex; flex-direction: column;">
+    <div class="assessment-panel-header" style="margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+      <label style="margin: 0; font-size: 12px; font-weight: normal; color: #666;">{{'assessment_textbox_title'+$root.os | translate}}</label>
+      <button class="btn btn-default btn-xs" ng-click="$ctrl.triggerAssessment()" 
+              ng-disabled="$ctrl.assessmentLoading"
+              style="font-size: 10px; padding: 1px 6px; line-height: 1.2;">
+        <i class="fa fa-refresh" ng-class="{'fa-spin': $ctrl.assessmentLoading}" style="margin-right: 3px;"></i>
+        <span ng-if="!$ctrl.assessmentLoading">{{'assessment_button_text'+$root.os | translate}}</span>
+        <span ng-if="$ctrl.assessmentLoading">...</span>
+      </button>
+    </div>
+    <div class="assessment-panel-content" style="flex: 1; min-height: 150px;">
+      <textarea class="form-control" 
+                style="resize: vertical; font-size: 12px; line-height: 1.3; height: 100%; border: 1px solid #ccc; padding: 8px; font-family: inherit; background-color: #fafafa; min-height: 150px;"
+                readonly="true"
+                placeholder="{{'assessment_placeholder_text'+$root.os | translate}}"
+                ng-model="$ctrl.assessmentDisplayText">
+      </textarea>
+    </div>
+  </div>
 </div>
 
 <metatext changefunction = "$ctrl.metatextChangeFunction(metatext)"
@@ -369,17 +393,3 @@
   readonly = "false"
   type = "$ctrl.metatextType">
 </metatext>
-
-<assessment changefunction = "$ctrl.metatextChangeFunction(metatext)"
-  closefunction = "$ctrl.closeAssessmentBox()"
-  connectortype = "$ctrl.assessmentConnectorType"
-  deletefunction = "$ctrl.assessmentDeleteFunction()"
-  editorid = "richtexteditor"
-  editorcointainerid = "richtexteditorcontainer"
-  icon = "$ctrl.metatextIcon"
-  id = "$ctrl.metatextId"
-  placeholder= "$ctrl.metatextPlaceholder"
-  showmetatext = "$ctrl.showMetatext"
-  readonly = "false"
-  type = "$ctrl.metatextType">
-</assessment>

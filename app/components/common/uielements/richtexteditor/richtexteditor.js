@@ -104,6 +104,21 @@ function RichTextEditorController($document, $injector, $rootScope,
     self.metatextPlaceholder = null;
     self.preventCloseMetatextBoxOnScroll = false;
     
+    // init assessment
+    self.showAssessment = true;
+    self.assessmentConnectorType = 'direct';
+    self.assessmentType = 'assessment';
+    self.assessmentId = 'text-assessment';
+    self.assessmentChangeFunction = null;
+    self.assessmentDeleteFunction = null;
+    self.assessmentIcon = 'search';
+    self.assessmentPlaceholder = 'Assessment results will appear here...';
+    self.assessmentText = 'Click "Analyze" to assess your text.'; 
+    self.assessmentDisplayText = ''; 
+    self.assessmentLoading = false; 
+    self.showAssessmentSidebar = true; 
+    
+    
     // init comments
     self.commentsNumber = 0;
 
@@ -423,23 +438,8 @@ function RichTextEditorController($document, $injector, $rootScope,
     LoggerService.info(self.savedcontent);
     LoggerService.info(ProjectService.getProjectInfo().id);
     
-    // Call the assessment service and handle the promise
-    AssessmentService.assess(ProjectService.getProjectInfo().id, self.savedcontent)
-      .then(function(data) {
-        LoggerService.info('Assessment completed successfully');
-        LoggerService.info('Full assessment data: ' + JSON.stringify(data));
-        
-        if (data && data.assessment) {
-          LoggerService.info('Assessment result: ' + data.assessment);
-          // TODO: Display assessment result to user (e.g., in a modal or sidebar)
-        } else {
-          LoggerService.warn('No assessment result found in response data');
-        }
-      })
-      .catch(function(error) {
-        LoggerService.error('Assessment failed:', error);
-        // TODO: Show error message to user
-      });
+    // Trigger assessment using the new function
+    self.triggerAssessment();
   });
 
   self.blur = function() {
@@ -1747,6 +1747,60 @@ function RichTextEditorController($document, $injector, $rootScope,
     self.metatextDeleteFunction = null;
     self.metatextIcon = null;
     self.metatextPlaceholder = null;
+  };
+
+  // Assessment functions
+  self.closeAssessmentBox = function() {
+    LoggerService.info('Assessment box close requested');
+  };
+
+  self.assessmentChangeFunction = function(assessment) {
+    LoggerService.info('Assessment text changed:', assessment);
+  };
+
+  self.assessmentDeleteFunction = function() {
+    LoggerService.info('Assessment delete requested');
+  };
+
+  self.triggerAssessment = function() {
+    if (!self.content || self.content.trim() === '<p><br></p>' || self.content.trim() === '') {
+      self.assessmentText = 'Please write some text to analyze.';
+      self.assessmentDisplayText = 'Please write some text to analyze.';
+      return;
+    }
+    
+    self.assessmentLoading = true;
+    self.assessmentText = 'Analyzing text...';
+    self.assessmentDisplayText = 'Analyzing text...';
+    
+    // Call the assessment service
+    AssessmentService.assess(ProjectService.getProjectInfo().id, self.content)
+      .then(function(data) {
+        self.assessmentLoading = false;
+        LoggerService.info('Assessment completed successfully');
+        LoggerService.info('Full assessment data: ' + JSON.stringify(data));
+        
+        if (data && data.assessment) {
+          LoggerService.info('Assessment result: ' + data.assessment);
+          self.assessmentText = data.assessment;
+          self.assessmentDisplayText = data.assessment;
+        } else {
+          LoggerService.warn('No assessment result found in response data');
+          self.assessmentText = 'No assessment result available';
+          self.assessmentDisplayText = 'No assessment result available';
+        }
+      })
+      .catch(function(error) {
+        self.assessmentLoading = false;
+        LoggerService.error('Assessment failed:', error);
+        self.assessmentText = 'Assessment failed: ' + error;
+        self.assessmentDisplayText = 'Assessment failed: ' + error;
+      });
+  };
+
+  // Function to toggle assessment sidebar
+  self.toggleAssessmentSidebar = function() {
+    self.showAssessmentSidebar = !self.showAssessmentSidebar;
   };
   
   self.setCursorInElement = function(element) {

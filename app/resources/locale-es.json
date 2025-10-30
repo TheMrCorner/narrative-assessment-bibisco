@@ -1280,5 +1280,8 @@
   "next_chapter": "siguiente capítulo",
   "previous_chapter": "capítulo anterior",
   "next_section": "siguiente sección",
-  "previous_section": "sección anterior"
+  "previous_section": "sección anterior",
+  "assessment_placeholder_text": "Aquí aparecerá el análisis del texto",
+  "assessment_button_text": "Analizar",
+  "assessment_textbox_title": "Análisis"
 }

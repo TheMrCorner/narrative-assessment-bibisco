@@ -14,34 +14,34 @@ angular.
       id: '<',
       placeholder: '<',
       readonly: '<',
-      showAssessment: '<',
+      showassessment: '<',
+      text: '<',
       type: '<',
     }
   });
 
-function AssessmentController($q) {
+function AssessmentController($q, BibiscoPropertiesService) {
   let self = this;
   const ASSESSMENT_BOX_HEIGHT = 150;
   const COMMENT_WIDTH = 250+10; 
 
-  elf.$onInit = function() {
-    self.resettAssessmentBox();
+  self.$onInit = function() {
+    self.showAssessmentBox();
     self.lineTopOffset = self.calculateLineTopOffset();
+    if (!self.text) {
+      self.text = 'Assessment will appear here...';
+    }
   };
 
   self.$onChanges = function() {
-    if (self.showAssessment) {
-      self.showAssessmentBox();
-    } else {
-      self.resettAssessmentBox();
-    }
+    self.showAssessmentBox();
   };
 
   self.closeAssessmentBox = function() {
     self.closefunction();
   };
 
-  self.resettAssessmentBox = function() {
+  self.resetAssessmentBox = function() {
     self.text = null;
     self.positionTop = null;
     self.positionLeft = null;
@@ -72,19 +72,19 @@ function AssessmentController($q) {
       return;
     }
 
-    // I use the container editor to determine the top and bottom visibility of comment box
     let editorContainerPosition = editorcointainer.getBoundingClientRect();
-    // I use the container editor to determine the left position of comment box
     let editorPosition = editor.getBoundingClientRect();
 
     let spanAssessmentSources = document.getElementsByClassName(self.type + '-' + self.id);
+    let foundPosition = false;
+    
     for (let i = 0; i < spanAssessmentSources.length; i++) {
       const spanAssessmentSourcePosition = spanAssessmentSources[i].getBoundingClientRect();
       if (spanAssessmentSourcePosition.top > editorContainerPosition.top 
         && spanAssessmentSourcePosition.top < editorContainerPosition.bottom) {
 
         if (spanAssessmentSourcePosition.top + ASSESSMENT_BOX_HEIGHT > editorContainerPosition.bottom) {
-          self.positionTop = editorContainerPosition.bottom - Assessment_BOX_HEIGHT;
+          self.positionTop = editorContainerPosition.bottom - ASSESSMENT_BOX_HEIGHT;
         } else {
           self.positionTop = spanAssessmentSourcePosition.top;
         }
@@ -93,7 +93,19 @@ function AssessmentController($q) {
         self.lineLeft = editorPosition.left - 7;
         self.lineWidth = spanAssessmentSourcePosition.left-editorPosition.left;
         self.text = angular.element(spanAssessmentSources[i]).attr('data-'+self.type);
+        foundPosition = true;
         break;
+      }
+    }
+    
+    if (!foundPosition) {
+      self.positionTop = editorContainerPosition.top + 20;
+      self.positionLeft = editorPosition.right - COMMENT_WIDTH - 20;
+      self.lineTop = editorContainerPosition.top + 20;
+      self.lineLeft = editorPosition.right - 20;
+      self.lineWidth = 0;
+      if (!self.text) {
+        self.text = 'Assessment will appear here...';
       }
     }
   };

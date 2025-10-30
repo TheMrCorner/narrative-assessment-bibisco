@@ -1,4 +1,4 @@
-<div class="assessment-box assessment-box-{{$ctrl.type}}" ng-if="$ctrl.showassessment" 
+<div class="assessment-box assessment-box-{{$ctrl.type}}" 
   style="top: {{$ctrl.positionTop}}px; left: {{$ctrl.positionLeft}}px;">
   <i class="fa fa-{{$ctrl.icon}} text-primary"></i>
   <div class="assessment-box-body assessment-box-body-{{$ctrl.type}}">
@@ -9,7 +9,7 @@
   <div class="assessment-box-footer bibiscoNotSelectableText">
     <div class="row">
       <div class="col-sm-6 text-left"><a ng-if="!$ctrl.readonly" ng-click="$ctrl.deletefunction()">{{'jsp.common.button.delete' | translate}}</a></div>
-      <div class="col-sm-6 text-right"><a ng-click="$ctrl.closeassessmentBox()">{{'jsp.common.button.close' | translate}}</a></div>
+      <div class="col-sm-6 text-right"><a ng-click="$ctrl.closeAssessmentBox()">{{'jsp.common.button.close' | translate}}</a></div>
     </div>
   </div>
 </div>

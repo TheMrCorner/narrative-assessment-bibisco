@@ -12,7 +12,7 @@ def health_check():
 def assessment_endpoint():
     data = request.get_json()
     # Placeholder for assessment logic
-    result = {"assessment": "This is a placeholder assessment result."}
+    result = {"assessment": "Esto es una respuesta por defecto."}
     return jsonify(result), 200
 
 @app.route('/load-project/<project_id>', methods=['POST'])
