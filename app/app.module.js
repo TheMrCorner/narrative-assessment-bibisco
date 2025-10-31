@@ -32,7 +32,8 @@ angular.module('bibiscoApp', ['ngRoute',
   const ipc = require('electron').ipcRenderer;
 
   let BibiscoDbConnectionService = $injector.get('BibiscoDbConnectionService'); 
-  let BibiscoPropertiesService = $injector.get('BibiscoPropertiesService'); 
+  let BibiscoPropertiesService = $injector.get('BibiscoPropertiesService');
+  let AssessmentService = $injector.get('AssessmentService'); 
   let LoggerService = $injector.get('LoggerService'); 
   let ProjectService = $injector.get('ProjectService'); 
   let NavigationService = $injector.get('NavigationService'); 
@@ -101,6 +102,7 @@ angular.module('bibiscoApp', ['ngRoute',
 
   // global variables
   $rootScope.actualPath = null;
+  $rootScope.assessmentApiReady = false;
   $rootScope.bibiscoStarted = false;
   $rootScope.cursorPositionCache = new Map();
   $rootScope.dirty = false;
@@ -161,6 +163,15 @@ angular.module('bibiscoApp', ['ngRoute',
         $rootScope.previousPath = oldUrl.split('!')[1];
       }
     });
+  
+  $rootScope.$on('PROPERTY_CHANGED', 
+    function (event, data) {
+      LoggerService.info('[APP_MODULE_JS] [PROPERTY_CHANGED] Some property has changed');
+      if (data.name === 'projectsDirectory' && $rootScope.assessmentApiReady) {
+        LoggerService.info('[APP_MODULE_JS] [PROPERTY_CHANGED] Assessment service ready, setting up working directory');
+        AssessmentService.set_projects_directory(BibiscoPropertiesService.getProperty('projectsDirectory'));
+      }
+  });
 
   // keydown
   $scope.keydown = function(event) {
@@ -194,6 +205,14 @@ angular.module('bibiscoApp', ['ngRoute',
       ipc.sendSync('closeApp');
     }
 
+  });
+
+  ipc.on('set-assessment-api-ready', (event, ready) => {
+    $rootScope.assessmentApiReady = ready;
+    LoggerService.debug('Assessment API ready status set to: ' + ready);
+        LoggerService.info('[APP_MODULE_JS] [PROPERTY_CHANGED] Assessment service ready, setting up working directory');
+        AssessmentService.set_projects_directory(BibiscoPropertiesService.getProperty('projectsDirectory'));
+    $rootScope.$apply();
   });
   
 }).config(['$locationProvider', '$routeProvider',

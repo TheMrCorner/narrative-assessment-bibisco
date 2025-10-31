@@ -19,7 +19,7 @@ angular.
     controller: StartController
   });
 
-function StartController($location, $rootScope, ProjectService, SupporterEditionChecker) {
+function StartController($location, $rootScope, ProjectService, SupporterEditionChecker, BibiscoPropertiesService, AssessmentService) {
   
   $rootScope.$emit('SHOW_START');
 
@@ -30,6 +30,7 @@ function StartController($location, $rootScope, ProjectService, SupporterEdition
     if ($rootScope.actualPath === '/exitproject') {
       ProjectService.close();
     }
+    this.onAssessmentServiceReady();
   };
 
   self.projectsPresent = function() {
@@ -60,5 +61,14 @@ function StartController($location, $rootScope, ProjectService, SupporterEdition
     SupporterEditionChecker.filterAction(function() {
       $location.path('/createsequel');
     });
+  };
+
+  self.onAssessmentServiceReady = function() {
+    if($rootScope.assessmentApiReady) {
+      console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] Assessment service ready, setting up working directory');
+      AssessmentService.set_projects_directory(BibiscoPropertiesService.getProject)
+    } else {
+      console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] No directory set');
+    }
   };
 }

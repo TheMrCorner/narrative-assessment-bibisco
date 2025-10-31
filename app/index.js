@@ -323,10 +323,14 @@ async function checkApiHealth() {
     assessmentServiceReady = true
     if (mainWindow) {
       mainWindow.webContents.send('assessment-service-ready');
+      mainWindow.webContents.send('set-assessment-api-ready', true);
     }
   } catch (error) {
     console.log(error);
     console.log('Assessment Service not ready yet, retrying...');
+    if (mainWindow) {
+      mainWindow.webContents.send('set-assessment-api-ready', false);
+    }
     setTimeout(checkApiHealth, 1000);
   }
 }

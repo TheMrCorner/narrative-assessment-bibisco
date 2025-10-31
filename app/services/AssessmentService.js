@@ -1,4 +1,4 @@
-angular.module('bibiscoApp').service('AssessmentService', function($q) {
+angular.module('bibiscoApp').service('AssessmentService', function($q, $rootScope) {
   'use strict';
 
   const postMethod = 'POST';
@@ -6,37 +6,50 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
 
   const ipc = require('electron').ipcRenderer;
   const loadProjectEndpoint = '/load-project/';
-  let apiReady = false;
+  const assessEndpoint = '/assess';
+  const setProjectsDirectoryEndpoint = '/setup-working-directory';
 
-
-  function checkApiStatus() {
-    if (apiReady) return;
-    
-    console.log('Checking api status');
-    
-    ipc.send('check-api-status');
-    
-    const statusHandler = (event, response) => {
-        console.log('Checking api status: response.ready');
-        ipc.removeListener('api-status', statusHandler);
-        apiReady = response.ready;
-        console.log('API status checked:', apiReady);
-    };
-    
-    ipc.on('api-status', statusHandler);
-  }
-
-  checkApiStatus();
 
   return {
+    set_projects_directory: function(projectsDirectory) {
+        const deferred = $q.defer();
+
+        ipc.send('logger-info', '[ASSESSMENTSERVICE] [SET_PROJECT_DIRECTORY] called to set projects folder');
+
+        if(!$rootScope.assessmentApiReady) {
+            ipc.send('logger-info', '[ASSESSMENTSERVICE] [SET_PROJECT_DIRECTORY] Python API not ready');
+            deferred.reject('Python API is not ready')
+            return deferred.promise;
+        }
+
+        ipc.send('api-call', {
+            method: postMethod,
+            endpoint: setProjectsDirectoryEndpoint,
+            data: { working_directory: projectsDirectory }
+        });
+
+        const responseHandler = (event, response) => {
+            ipc.removeListener('api-response', responseHandler);
+            
+            if (response.success) {
+                deferred.resolve(response.data);
+            } else {
+                deferred.reject(response.error);
+            }
+        };
+        
+        ipc.on('api-response', responseHandler);
+        
+        return deferred.promise;
+    },
     load_project: function(projectId) {
         const deferred = $q.defer();
 
         
-        ipc.send('logger-info', 'called to load the project');
+        ipc.send('logger-info', '[ASSESSMENTSERVICE] [LOAD_PROJECT] called to load the project');
 
-        if (!apiReady) {
-            ipc.send('logger-info', 'Python API is not ready');
+        if (!$rootScope.assessmentApiReady) {
+            ipc.send('logger-info', '[ASSESSMENTSERVICE] [LOAD_PROJECT] Python API is not ready');
             deferred.reject('Python API is not ready');
             return deferred.promise;
         }
@@ -50,13 +63,13 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
         });
 
         const responseHandler = (event, response) => {
-        ipc.removeListener('api-response', responseHandler);
-        
-        if (response.success) {
-            deferred.resolve(response.data);
-        } else {
-            deferred.reject(response.error);
-        }
+            ipc.removeListener('api-response', responseHandler);
+            
+            if (response.success) {
+                deferred.resolve(response.data);
+            } else {
+                deferred.reject(response.error);
+            }
         };
         
         ipc.on('api-response', responseHandler);
@@ -66,19 +79,17 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
     assess: function(projectId, text) {
         const deferred = $q.defer();
         
-        console.log("Assessment called for project: " + projectId +" with text: " + text);
+        console.log("[ASSESSMENTSERVICE] [ASSESS] Assessment called for project: " + projectId +" with text: " + text);
         
-        if (!apiReady) {
-            ipc.send('logger-info', 'Python API is not ready for assessment');
+        if (!$rootScope.assessmentApiReady) {
+            ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] Python API is not ready for assessment');
             deferred.reject('Python API is not ready');
             return deferred.promise;
         }
 
-        let endpoint = '/assess';
-
         ipc.send('api-call', { 
             method: postMethod,
-            endpoint: endpoint,
+            endpoint: assessEndpoint,
             data: { 
                 projectId: projectId,
                 text: text
@@ -90,18 +101,18 @@ angular.module('bibiscoApp').service('AssessmentService', function($q) {
             ipc.removeListener('api-response', responseHandler);
             
             if (response.success) {
-                ipc.send('logger-info', 'Assessment completed successfully');
-                ipc.send('logger-info', 'Full response data: ' + JSON.stringify(response.data));
+                ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] Assessment completed successfully');
+                ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] Full response data: ' + JSON.stringify(response.data));
                 
                 if (response.data && response.data.assessment) {
-                    ipc.send('logger-info', 'Assessment result: ' + response.data.assessment);
+                    ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] Assessment result: ' + response.data.assessment);
                 } else {
-                    ipc.send('logger-info', 'No assessment property found in response data');
+                    ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] No assessment property found in response data');
                 }
                 
                 deferred.resolve(response.data);
             } else {
-                ipc.send('logger-info', 'Assessment failed: ' + response.error);
+                ipc.send('logger-info', '[ASSESSMENTSERVICE] [ASSESS] Assessment failed: ' + response.error);
                 deferred.reject(response.error);
             }
         };

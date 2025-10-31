@@ -13,7 +13,7 @@
  *
  */
 
-angular.module('bibiscoApp').service('BibiscoPropertiesService', function (
+angular.module('bibiscoApp').service('BibiscoPropertiesService', function ($rootScope,
   BibiscoDbConnectionService, LoggerService) {
   'use strict';
 
@@ -37,12 +37,22 @@ angular.module('bibiscoApp').service('BibiscoPropertiesService', function (
       });
 
       if (property) {
+        oldValue = property.value;
         property.value = value;
+        $rootScope.$broadcast('PROPERTY_CHANGED', {
+          name: name,
+          newValue: value,
+          oldValue: oldValue
+        })
         return properties.update(property);
       } else {
         property = {};
         property.name = name;
         property.value = value;
+        $rootScope.$broadcast('PROPERTY_CREATED', {
+          name: name,
+          newValue: value
+        })
         return properties.insert(property);
       }
     },
