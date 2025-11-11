@@ -1,0 +1,3 @@
+[submodule "narrative-rag-mcp"]
+	path = narritive-rag-mcp
+	url = git@github.com:cleongh/narritive-rag-mcp.git
