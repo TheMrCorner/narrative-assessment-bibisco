@@ -65,10 +65,17 @@ function StartController($location, $rootScope, ProjectService, SupporterEdition
 
   self.onAssessmentServiceReady = function() {
     if($rootScope.assessmentApiReady) {
-      console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] Assessment service ready, setting up working directory');
-      AssessmentService.set_projects_directory(BibiscoPropertiesService.getProject)
+      let projectsDirectory = BibiscoPropertiesService.getProperty('projectsDirectory');
+      if (projectsDirectory) {
+        console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] Assessment service ready, setting up working directory: ' + projectsDirectory);
+        AssessmentService.set_projects_directory(projectsDirectory).catch(function(error) {
+          console.error('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] Failed to set working directory: ' + error);
+        });
+      } else {
+        console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] No projects directory configured yet');
+      }
     } else {
-      console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] No directory set');
+      console.log('[START_CONTROLLER] [ON_ASSESSMENT_SERVICE_READY] Assessment API not ready');
     }
   };
 }

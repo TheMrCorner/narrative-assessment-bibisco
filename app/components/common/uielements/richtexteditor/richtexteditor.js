@@ -1772,9 +1772,14 @@ function RichTextEditorController($document, $injector, $rootScope,
     self.assessmentLoading = true;
     self.assessmentText = 'Analyzing text...';
     self.assessmentDisplayText = 'Analyzing text...';
+
+    let tempDiv = document.createElement('div');
+    tempDiv.innerHTML = self.content;
+    let textContent = tempDiv.textContent || tempDiv.innerText || '';
+    plainText = textContent.trim();
     
     // Call the assessment service
-    AssessmentService.assess(ProjectService.getProjectInfo().id, self.content)
+    AssessmentService.assess(ProjectService.getProjectInfo().id, plainText)
       .then(function(data) {
         self.assessmentLoading = false;
         LoggerService.info('Assessment completed successfully');

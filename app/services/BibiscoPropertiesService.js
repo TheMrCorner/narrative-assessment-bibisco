@@ -37,7 +37,7 @@ angular.module('bibiscoApp').service('BibiscoPropertiesService', function ($root
       });
 
       if (property) {
-        oldValue = property.value;
+        let oldValue = property.value;
         property.value = value;
         $rootScope.$broadcast('PROPERTY_CHANGED', {
           name: name,

@@ -210,8 +210,23 @@ angular.module('bibiscoApp', ['ngRoute',
   ipc.on('set-assessment-api-ready', (event, ready) => {
     $rootScope.assessmentApiReady = ready;
     LoggerService.debug('Assessment API ready status set to: ' + ready);
-        LoggerService.info('[APP_MODULE_JS] [PROPERTY_CHANGED] Assessment service ready, setting up working directory');
-        AssessmentService.set_projects_directory(BibiscoPropertiesService.getProperty('projectsDirectory'));
+    
+    if (ready) {
+      let projectsDirectory = BibiscoPropertiesService.getProperty('projectsDirectory');
+      if (projectsDirectory) {
+        LoggerService.info('[APP_MODULE_JS] [SET_ASSESSMENT_API_READY] Assessment service ready, setting up working directory: ' + projectsDirectory);
+        AssessmentService.set_projects_directory(projectsDirectory)
+          .then(function(result) {
+            LoggerService.info('[APP_MODULE_JS] [SET_ASSESSMENT_API_READY] Working directory setup successfully: ' + JSON.stringify(result));
+          })
+          .catch(function(error) {
+            LoggerService.error('[APP_MODULE_JS] [SET_ASSESSMENT_API_READY] Failed to set working directory: ' + error);
+          });
+      } else {
+        LoggerService.info('[APP_MODULE_JS] [SET_ASSESSMENT_API_READY] No projects directory configured yet, will be set after welcome screen');
+      }
+    }
+    
     $rootScope.$apply();
   });
   
