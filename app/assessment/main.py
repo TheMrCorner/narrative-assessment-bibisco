@@ -25,7 +25,7 @@ def assessment_endpoint():
     result = query("elf adventure quest magic",
                      file=None,  # No RAG for faster response
                      port=8081,
-                     prompt=lambda context: "Write a 2-sentence story about an elf")
+                     prompt=lambda context: "Write a 2-sentence story about an elf who finds the power of a Silmarill")
 
     print(result)
 

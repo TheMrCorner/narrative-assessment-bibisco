@@ -289,9 +289,14 @@ ipc.on('api-call', async function(event, arg) {
 function startAssessmentService() {
   console.log('Starting Assessment Service...');
 
-  // Spawn the Assessment Service process
+  /*// Spawn the Assessment Service process
   assessmentService = spawn('python', ['assessment/main.py'], {
     cwd: __dirname, // Run from the app directory
+    stdio: ['pipe', 'pipe', 'pipe']
+  });*/
+
+  assessmentService = spawn('uv', ['run', 'python', '../app/assessment/main.py'], {
+    cwd: path.join(__dirname, '..', 'narritive-rag-mcp'), // Run from the app directory
     stdio: ['pipe', 'pipe', 'pipe']
   });
 
