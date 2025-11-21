@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import sys
 import os
+import json
 
 workspace_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 rag_mcp_dir = os.path.join(workspace_root, 'narritive-rag-mcp')
@@ -11,6 +12,13 @@ from llm_query import query
 app = Flask(__name__)
 working_directory = ""
 
+# RAG configuration
+rag_enabled = False
+assessment_title = ""
+
+# Assessment prompts
+assessment_prompt_no_rag = ""
+
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "healthy", "message": "Assessment service is running"}), 200
@@ -18,14 +26,15 @@ def health_check():
 @app.route('/assess', methods=['POST'])
 def assessment_endpoint():
     data = request.get_json()
-    print(f"[PYTHON API] [ASSESS] What is the working directory? {working_directory}")
-    print(f"[PYTHON API] [ASSESS] Received data: {data}")
-    # Placeholder for assessment logic
 
-    result = query("elf adventure quest magic",
+    prompt = f"{assessment_prompt_no_rag}".format(text=data["text"])
+
+    print(f"[PYTHON API] [ASSESS] Invoking LLM query for assessment with data: {prompt}")
+
+    result = query(assessment_title,
                      file=None,  # No RAG for faster response
                      port=8081,
-                     prompt=lambda context: "Write a 2-sentence story about an elf who finds the power of a Silmarill")
+                     prompt=lambda context: prompt)
 
     print(result)
 
@@ -80,4 +89,9 @@ def load_project_endpoint(project_id: str):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    with open(os.path.join(os.path.dirname(__file__), 'assessment_configuration.json'), 'r') as file:
+        configuration_data = json.load(file)
+        rag_enabled = configuration_data["rag_enabled"]
+        assessment_title = configuration_data["assessment_title"]
+        assessment_prompt_no_rag = configuration_data["assessment_prompt_no_rag"]
     app.run(host='127.0.0.1', port=port, debug=False)

@@ -1,0 +1,5 @@
+{
+    "rag_enabled": false,
+    "assessment_title": "Chapter Summary Assessment",
+    "assessment_prompt_no_rag": "Assess the following summary of a new chapter for the current story. Provide feedback on plot coherence, character development, and potential improvements. The response should be at least 2 paragraphs long and no more than 5 paragraphs. Text: {text}"
+}

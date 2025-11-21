@@ -307,7 +307,7 @@ function startAssessmentService() {
   llamaFileService = spawn('./google_gemma-3-12b-it-Q4_K_M.llamafile', ['--server', '--nobrowser', '-ngl', '18', '--gpu', 'nvidia'],
     {
       cwd: path.join(__dirname, '..', '..', '..', 'models'), // Run from the app directory
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['inherit', 'inherit', 'inherit']
     }
   );
 
@@ -315,7 +315,7 @@ function startAssessmentService() {
 
   console.log('Starting Assessment Service...');
   // Spawn assessment service process
-  assessmentService = spawn('uv', ['run', 'python', '../app/assessment/main.py'], {
+  assessmentService = spawn('uv', ['run', 'python', '-u', '../app/assessment/main.py'], {
     cwd: path.join(__dirname, '..', 'narritive-rag-mcp'), // Run from the app directory
     stdio: ['pipe', 'pipe', 'pipe']
   });
@@ -344,7 +344,7 @@ function startAssessmentService() {
 async function startMcpService() {
   console.log('Starting MCP Service...');
 
-  assessmentService = spawn('uv', ['run', 'python', 'mcp_bridge.py'], {
+  mcpService = spawn('uv', ['run', 'python', 'mcp_bridge.py'], {
     cwd: path.join(__dirname, '..', 'narritive-rag-mcp'), // Run from the app directory
     stdio: ['pipe', 'pipe', 'pipe']
   });
