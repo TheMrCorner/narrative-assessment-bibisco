@@ -32,6 +32,18 @@ let assessmentServiceReady = false;
 const PORT = 5000;
 const BASE_URL = `http://localhost:${PORT}`;
 
+// LlamaFile service management
+let llamaFileService = null;
+let llamaFileServiceReady = false;
+const LLAMA_FILE_PORT = 8080;
+const LLAMA_FILE_BASE_URL = `http://localhost:${LLAMA_FILE_PORT}`;
+
+// MCP service management
+let mcpService = null;
+let mcpServiceReady = false;
+const MCP_PORT = 8081;
+const MCP_BASE_URL = `http://localhost:${MCP_PORT}`;
+
 // prevent window being garbage collected
 let mainWindow;
 
@@ -287,14 +299,22 @@ ipc.on('api-call', async function(event, arg) {
 });
 
 function startAssessmentService() {
+  console.log('Starting Assessment Cluster and Tools...');
+
+  console.log('Starting LlamaFile Service...');
+  console.log(path.join(__dirname, '..', '..', '..', 'models'));
+  // Spawn llamafile service process
+  llamaFileService = spawn('./google_gemma-3-12b-it-Q4_K_M.llamafile', ['--server', '--nobrowser', '-ngl', '18', '--gpu', 'nvidia'],
+    {
+      cwd: path.join(__dirname, '..', '..', '..', 'models'), // Run from the app directory
+      stdio: ['pipe', 'pipe', 'pipe']
+    }
+  );
+
+  setTimeout(checkLlamafileService, 2000);
+
   console.log('Starting Assessment Service...');
-
-  /*// Spawn the Assessment Service process
-  assessmentService = spawn('python', ['assessment/main.py'], {
-    cwd: __dirname, // Run from the app directory
-    stdio: ['pipe', 'pipe', 'pipe']
-  });*/
-
+  // Spawn assessment service process
   assessmentService = spawn('uv', ['run', 'python', '../app/assessment/main.py'], {
     cwd: path.join(__dirname, '..', 'narritive-rag-mcp'), // Run from the app directory
     stdio: ['pipe', 'pipe', 'pipe']
@@ -321,6 +341,17 @@ function startAssessmentService() {
   setTimeout(checkApiHealth, 2000);
 }
 
+async function startMcpService() {
+  console.log('Starting MCP Service...');
+
+  assessmentService = spawn('uv', ['run', 'python', 'mcp_bridge.py'], {
+    cwd: path.join(__dirname, '..', 'narritive-rag-mcp'), // Run from the app directory
+    stdio: ['pipe', 'pipe', 'pipe']
+  });
+
+  setTimeout(checkMcpHealth, 2000);
+}
+
 async function checkApiHealth() {
   try {
     const response = await axios.get(`${BASE_URL}/health`);
@@ -340,11 +371,66 @@ async function checkApiHealth() {
   }
 }
 
+async function checkLlamafileService() {
+  try {
+    const response = await axios.get(`${LLAMA_FILE_BASE_URL}/v1/models`);
+    console.log('LlamaFile Service is ready!');
+    llamaFileServiceReady = true
+    if (mainWindow) {
+      mainWindow.webContents.send('llamafile-service-ready');
+      mainWindow.webContents.send('set-llamafile-api-ready', true);
+    }
+    startMcpService();
+  } catch (error) {
+    console.log(error);
+    console.log('LlamaFile Service not ready yet, retrying...');
+    if (mainWindow) {
+      mainWindow.webContents.send('set-llamafile-api-ready', false);
+    }
+    setTimeout(checkLlamafileService, 1000);
+  }
+}
+
+async function checkMcpHealth() {
+  try {
+    const response = await axios.get(`${MCP_BASE_URL}/health`);
+    console.log('MCP Service is ready!');
+    mcpServiceReady = true;
+    if (mainWindow) {
+      mainWindow.webContents.send('mcp-service-ready');
+      mainWindow.webContents.send('set-mcp-api-ready', true);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log('MCP Service not ready yet, retrying...');
+    if (mainWindow) {
+      mainWindow.webContents.send('set-mcp-api-ready', false);
+    }
+    setTimeout(checkMcpHealth, 1000);
+  }
+}
+
 function stopAssessmentService() {
   if (assessmentService) {
     console.log('Stopping Assessment Service...');
     assessmentService.kill('SIGTERM');
     assessmentService = null;
+  }
+}
+
+function stopLlamaFileService() {
+  if (llamaFileService) {
+    console.log('Stopping LlamaFile Service...');
+    llamaFileService.kill('SIGTERM');
+    llamaFileService = null;
+  }
+}
+
+function stopMcpService() {
+  if (mcpService) {
+    console.log('Stopping MCP Service...');
+    mcpService.kill('SIGTERM');
+    mcpService = null;
   }
 }
 
@@ -678,10 +764,14 @@ app.on('browser-window-focus', function () {
 
 app.on('before-quit', function () {
   stopAssessmentService();
+  stopLlamaFileService();
+  stopMcpService();
 });
 
 app.on('window-all-closed', function () {
   stopAssessmentService();
+  stopLlamaFileService();
+  stopMcpService();
   if (process.platform !== 'darwin') {
     app.quit();
   }
