@@ -68,7 +68,8 @@ angular.
       taskstatus: '<',
       taskstatuschangefunction: '&',
       words: '=',
-      wordscharactersenabled: '<'
+      wordscharactersenabled: '<',
+      showassessment: '<?'
     }
   });
 

@@ -358,7 +358,7 @@
   </div>
   </div>
 
-  <div class="assessment-panel" style="flex: 0 0 240px; margin-left: 12px; display: flex; flex-direction: column;">
+  <div class="assessment-panel" ng-if="$ctrl.showassessment" style="flex: 0 0 240px; margin-left: 12px; display: flex; flex-direction: column;">
     <div class="assessment-panel-header" style="margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
       <label style="margin: 0; font-size: 12px; font-weight: normal; color: #666;">{{'assessment_textbox_title'+$root.os | translate}}</label>
       <button class="btn btn-default btn-xs" ng-click="$ctrl.triggerAssessment()" 

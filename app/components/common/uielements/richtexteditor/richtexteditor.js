@@ -29,7 +29,8 @@ angular.
       previouselementtooltip: '@?',
       todaywords: '=?',
       totalwords: '=?',
-      words: '='
+      words: '=', 
+      showassessment: '<?'
     }
   });
 

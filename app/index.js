@@ -26,6 +26,9 @@ const path = require('path');
 const { spawn } = require('child_process');
 const axios = require('axios');
 
+// Assessment service configuration
+let assessmentConfig = null;
+
 // Assessment service management
 let assessmentService = null;
 let assessmentServiceReady = false;
@@ -298,15 +301,26 @@ ipc.on('api-call', async function(event, arg) {
   }
 });
 
+function loadAssessmentConfig() {
+  try {
+    const configPath = path.join(__dirname, 'assessment_config.json');
+    const configData = fs.readFileSync(configPath, 'utf8');
+    assessmentConfig = JSON.parse(configData);
+    console.log('Assessment configuration loaded:', assessmentConfig);
+  } catch (error) {
+    console.error('Error loading assessment configuration:', error.message);
+  }
+}
+
 function startAssessmentService() {
   console.log('Starting Assessment Cluster and Tools...');
 
   console.log('Starting LlamaFile Service...');
-  console.log(path.join(__dirname, '..', '..', '..', 'models'));
+  console.log(assessmentConfig.llamafile.directory);
   // Spawn llamafile service process
-  llamaFileService = spawn('./google_gemma-3-12b-it-Q4_K_M.llamafile', ['--server', '--nobrowser', '-ngl', '18', '--gpu', 'nvidia'],
+  llamaFileService = spawn(`./${assessmentConfig.llamafile.filename}`, assessmentConfig.llamafile.args,
     {
-      cwd: path.join(__dirname, '..', '..', '..', 'models'), // Run from the app directory
+      cwd: assessmentConfig.llamafile.directory, // Run from the app directory
       stdio: ['inherit', 'inherit', 'inherit']
     }
   );
@@ -709,7 +723,12 @@ app.on('activate', function() {
 });
 
 app.on('ready', function() {
+  // Load assessment configuration
+  loadAssessmentConfig();
+
+  // Start assessment services
   startAssessmentService();
+
   mainWindow = createMainWindow();
   if (process.platform === 'darwin') {
     let menuTemplate;

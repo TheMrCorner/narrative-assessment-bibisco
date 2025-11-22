@@ -16,10 +16,13 @@ angular.
   module('bibiscoApp').
   component('chapterinfodetail', {
     templateUrl: 'components/chapters/chapter-info-detail.html',
-    controller: ChapterInfoDetailController
+    controller: ChapterInfoDetailController,
+    bindings: {
+      showassessment: '<?'
+    }
   });
 
-function ChapterInfoDetailController($location, $routeParams,  $window, ChapterService, NavigationService) {
+function ChapterInfoDetailController($location, $routeParams,  $window, ChapterService, NavigationService, LoggerService) {
 
   let self = this;
 
@@ -35,6 +38,8 @@ function ChapterInfoDetailController($location, $routeParams,  $window, ChapterS
       return;
     }
 
+    LoggerService.info('[CHAPTER INFO DETAIL] Has showassessment: ', self.showassessment);
+
     self.mode = NavigationService.calculateMode($routeParams.mode); 
 
     self.chapterinfo;
@@ -42,11 +47,19 @@ function ChapterInfoDetailController($location, $routeParams,  $window, ChapterS
       self.chapterinfo = self.chapter.reason;
       self.title = 'common_chapter_reason';
       self.subtitle = 'jsp.chapter.thumbnail.reason.description';
+      self.showassessment = true;
     } else if ($routeParams.type === 'notes') {
       self.chapterinfo = self.chapter.notes;
       self.title = 'common_chapter_notes';
       self.subtitle = 'common_notes_description';
+    } else if ($routeParams.type === 'sinopsis_1') {
+      self.chapterinfo = self.chapter.reason;
+      self.title = 'jsp.chapter.thumbnail.sinopsis.title';
+      self.subtitle = 'jsp.chapter.thumbnail.sinopsis.description';
+      self.showassessment = true;
     }
+
+    LoggerService.info('[CHAPTER INFO DETAIL] Has showassessment: ', self.showassessment);
 
     self.breadcrumbitems.push({
       label: 'common_chapters',

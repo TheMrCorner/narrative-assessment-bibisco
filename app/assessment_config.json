@@ -1,0 +1,14 @@
+{
+    "llamafile": {
+        "directory": "/home/mrcorner/Workspace/models",
+        "filename": "google_gemma-3-12b-it-Q4_K_M.llamafile",
+        "args": [
+            "--server",
+            "--nobrowser",
+            "-ngl",
+            "18",
+            "--gpu",
+            "nvidia"
+        ]
+    }
+}

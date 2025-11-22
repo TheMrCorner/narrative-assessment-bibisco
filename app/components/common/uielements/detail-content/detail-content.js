@@ -34,7 +34,8 @@ angular.
       showprojectexplorer: '<',
       todaywords: '=?',
       totalwords: '=?',
-      words: '='
+      words: '=',
+      showassessment: '<?'
     }
   });
 
