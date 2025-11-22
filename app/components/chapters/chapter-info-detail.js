@@ -53,7 +53,7 @@ function ChapterInfoDetailController($location, $routeParams,  $window, ChapterS
       self.title = 'common_chapter_notes';
       self.subtitle = 'common_notes_description';
     } else if ($routeParams.type === 'sinopsis_1') {
-      self.chapterinfo = self.chapter.reason;
+      self.chapterinfo = self.chapter.sinopsis_1;
       self.title = 'jsp.chapter.thumbnail.sinopsis.title';
       self.subtitle = 'jsp.chapter.thumbnail.sinopsis.description';
       self.showassessment = true;

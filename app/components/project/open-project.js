@@ -39,6 +39,9 @@ function OpenProjectController($location, $rootScope, $timeout, $translate, Chap
     // check words written
     ChapterService.checkWordsWrittenInit();
 
+    // Check the project for sinopsis added
+    ChapterService.migrateChaptersToAddSinopsis1();
+
     // TODO call python service to analyze project
     AssessmentService.load_project(id);
 

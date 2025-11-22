@@ -409,6 +409,7 @@ angular.module('bibiscoApp').service('ChapterService', function ($injector, $roo
     executeInsert: function (chapter) {
       chapter.reason = this.createChapterInfo('todo');
       chapter.notes = this.createChapterInfo(null);
+      chapter.sinopsis_1 = this.createChapterInfo('todo');
       chapter = CollectionUtilService.insertWithoutCommit(this.getCollection(), chapter);
     },
 
@@ -1029,6 +1030,25 @@ angular.module('bibiscoApp').service('ChapterService', function ($injector, $roo
           }
         }
         CollectionUtilService.updateWithoutCommit(this.getScenesCollection(), scene);
+      }
+    },
+
+    migrateChaptersToAddSinopsis1: function() {
+      let chapters = this.getCollection().data;
+      let migrated = false;
+
+      for (let i = 0; i < chapters.length; i++) {
+        let chapter = chapters[i];
+        if (!chapter.sinopsis_1) {
+          chapter.sinopsis_1 = this.createChapterInfo('todo');
+          CollectionUtilService.updateWithoutCommit(this.getCollection(), chapter);
+          migrated = true;
+        }
+      }
+
+      if (migrated) {
+        ProjectDbConnectionService.saveDatabase();
+        LoggerService.info('Migrated chapters to add sinopsis_1 field.');
       }
     }
   };
